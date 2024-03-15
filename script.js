@@ -1,13 +1,9 @@
-function downloadLatex() {
-    // Create a download link
-    const downloadLink = document.createElement('a');
-    downloadLink.href = 'download.php';
-    downloadLink.download = 'latex_content.txt';
+const toggleBtns = document.querySelectorAll('.toggle-btn');
 
-    // Append the link to the document and trigger the download
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-
-    // Remove the link from the document
-    document.body.removeChild(downloadLink);
-}
+toggleBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const childContainer = btn.nextElementSibling;
+    childContainer.classList.toggle('hidden');
+    btn.textContent = childContainer.classList.contains('hidden') ? '&#9658;' : '&#9660;';
+  });
+});

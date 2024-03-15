@@ -198,7 +198,6 @@ img {
   row-gap: 5rem;
   padding: 4rem 0 5rem;
 }
-
 .home__data {
   align-self: center;
 }
@@ -242,7 +241,9 @@ img {
 .home__blob-img {
   width: 360px;
 }
-
+.home__title {
+  margin: 0;
+}
 /*BUTTONS*/
 .button {
   display: inline-block;
@@ -325,15 +326,15 @@ img {
 }
 
 .skills__cybersecurity {
-  width: 70%;
+  width: 50%;
 }
 
 .skills__ai {
-  width: 50%;
+  width: 5%;
 }
 
 .skills__iot {
-  width: 50%;
+  width: 15%;
 }
 
 .skills__cloud {
@@ -341,19 +342,21 @@ img {
 }
 
 .skills__python {
-  width: 75%;
+  width: 50%;
 }
 
 .skills__bash {
-  width: 65%;
+  width: 10%;
 }
 
 .skills__linux {
-  width: 65%;
+  width: 85%;
 }
-.skills__QuantamPhysics{
-  width:0%;
+
+.skills__QuantamPhysics {
+  width: 0%;
 }
+
 /* ===== WORK =====*/
 .timeline {
   position: relative;
@@ -376,11 +379,16 @@ img {
 
 /* Work Experince Heading */
 #timeline h2 {
-  border: 2px solid #333; /* Add border */
-  background-color: #f5f5f5; /* Add background color */
-  border-radius: 8px; /* Add border radius */
-  display: inline-block; /* Make it an inline-block element */
-  padding: 10px 20px; /* Add padding for spacing */
+  border: 2px solid #333;
+  /* Add border */
+  background-color: #f5f5f5;
+  /* Add background color */
+  border-radius: 8px;
+  /* Add border radius */
+  display: inline-block;
+  /* Make it an inline-block element */
+  padding: 10px 20px;
+  /* Add padding for spacing */
 }
 
 /* Timeline Items */
@@ -441,23 +449,23 @@ img {
 /* Responsiveness */
 @media screen and (max-width: 768px) {
   .timeline::after {
-      left: 31px;
+    left: 31px;
   }
 
   .timeline-item {
-      width: 100%;
-      padding-left: 70px;
-      padding-right: 25px;
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
   }
 
   .timeline-item.left,
   .timeline-item.right {
-      left: 0;
+    left: 0;
   }
 
   .timeline-item::after {
-      left: 15px;
-      right: auto;
+    left: 15px;
+    right: auto;
   }
 }
 
