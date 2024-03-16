@@ -1,24 +1,22 @@
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  text-align: center;
-  padding: 20px;
-}
-
 .container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 20px auto;
-  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
-.column {
-  flex: 1;
-  padding: 10px;
+.level {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.box {
+  background-color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
   text-align: center;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+  width: 200px;
 }
