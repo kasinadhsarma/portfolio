@@ -1033,6 +1033,28 @@ main {
 
 
 
+section #resume-download {
+  text-align: center;
+  background-color: white;
+}
+
+section #resume-download h2 {
+  margin-bottom: 1rem;
+}
+
+section #resume-download a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #000; /* Black background color */
+  color: #fff; /* White text color */
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+section #resume-download a:hover {
+  background-color: #333; /* Darker black background color on hover */
+}
+
 
 
 /*-----------------------------------*\
