@@ -801,6 +801,8 @@ main {
   line-height: 1.6;
 }
 
+
+
 .timeline-item:not(:last-child)::before {
   content: "";
   position: absolute;
@@ -827,13 +829,6 @@ main {
   color: var(--light-gray);
   font-weight: var(--fw-300);
   line-height: 1.6;
-}
-
-.timeline-ResumeDownload{
-    display:flex;
-    gap: 5px;
-    align-items: center;
-    margin-bottom: 10px;
 }
 
 
