@@ -103,6 +103,27 @@ body {
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
 
+  /* bright mode colors */
+  --bg-bright: hsl(30, 100%, 95%);
+  --text-dark: hsl(0, 0%, 10%);
+  --bg-bright-gradient: linear-gradient(
+    to bottom right,
+    hsl(30, 100%, 95%) 0%,
+    hsl(30, 100%, 85%) 100%
+  );
+  --border-bright: hsl(30, 100%, 80%);
+  --heading-bright: hsl(0, 0%, 20%);
+  --subheading-bright: hsl(0, 0%, 30%);
+  --text-bright: hsl(0, 0%, 40%);
+
+  /* toggle switch variables */
+  --toggleWidth: 60px;
+  --toggleHeight: 34px;
+  --toggleBtn-bgColor--night: hsl(240, 2%, 13%);
+  --toggleBtn-bgColor--day: hsl(30, 100%, 95%);
+  --toggleBtnRadius: 34px;
+  --mooncolor: hsl(0, 0%, 100%);
+
   /**
    * typography
    */
@@ -145,9 +166,228 @@ body {
 
 }
 
+/* Toggle Switch */
+.toggle-container {
+  position: fixed;
+  top: 20px; /* Move the switch to the top */
+  left: 20px; /* Ensure the switch is positioned at the left */
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  border-radius: 34px; /* Ensure the switch has a curved face */
+  background: var(--bg-bright); /* Background color for bright mode */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  transition: var(--transition-1); /* Smooth transition for background color */
+  z-index: 100010; /* Increased z-index to ensure visibility */
+  overflow: visible; /* Ensure the switch is not clipped */
+  border: 2px solid var(--orange-yellow-crayola); /* Add a border for better visibility */
+}
+
+.bot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: block;
+  flex-direction: column;
+  width: 300px;
+  height: 400px;
+  background-color: var(--eerie-black-2); /* Dark background color to match the portfolio's design */
+  border: 1px solid var(--jet); /* Dark border color to match the portfolio's design */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 100050; /* Ensure the bot container is above other elements */
+  overflow: hidden;
+  padding: 10px;
+}
+
+.bot-container .message {
+  padding: 10px; /* Add padding around the text in message bubbles */
+  margin-bottom: 10px; /* Add margin between messages */
+  border-radius: 5px; /* Round the corners of message bubbles */
+}
+
+.bot-container .message.user {
+  background-color: var(--jet); /* Dark background for user messages */
+  color: var(--white-1); /* White text color for user messages */
+}
+
+.bot-container .message.bot {
+  background-color: var(--onyx); /* Slightly lighter background for bot messages */
+  color: var(--white-1); /* White text color for bot messages */
+}
+
+.bot-container input[type="text"] {
+  margin-bottom: 10px; /* Add margin below the input field */
+  padding: 10px; /* Add padding inside the input field */
+  border: 1px solid var(--jet); /* Dark border for the input field */
+  border-radius: 5px; /* Round the corners of the input field */
+  background-color: var(--eerie-black-2); /* Dark background for the input field */
+  color: var(--white-1); /* White text color for the input field */
+}
+
+.bot-container button {
+  padding: 10px; /* Add padding inside the button */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Round the corners of the button */
+  background-color: var(--orange-yellow-crayola); /* Bright background color for the button */
+  color: var(--smoky-black); /* Dark text color for the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color var(--transition-1); /* Smooth transition for background color */
+}
+
+.bot-container button:hover {
+  background-color: var(--vegas-gold); /* Change background color on hover */
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--light-gray-70);
+  transition: var(--transition-1);
+  border-radius: 34px;
+  z-index: 100011; /* Increased z-index to ensure visibility */
+}
+
+.bot-emoji {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent; /* Ensure background is transparent */
+}
+
+.emoji-icon {
+  width: 30px; /* Adjusted width for better alignment */
+  height: 30px; /* Adjusted height for better alignment */
+  object-fit: cover;
+  margin: 0; /* Removed margin for better spacing */
+  z-index: 10; /* Increased z-index to ensure emoji is on top */
+  background-color: transparent; /* Ensure background is transparent */
+}
+
+.slider:before {
+  position: absolute;
+  content: url('../images/moon-icon.svg');
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--white-1);
+  transition: var(--transition-1);
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for the icon */
+  z-index: 100012; /* Increased z-index to ensure visibility */
+}
+
+.sun-icon, .moon-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: var(--transition-1);
+}
+
+.sun-icon {
+  left: 10px;
+  animation: glowing 1.5s infinite alternate;
+}
+
+.moon-icon {
+  right: 10px;
+  animation: moon-animation 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+  from {
+    box-shadow: 0 0 10px var(--orange-yellow-crayola), 0 0 20px var(--orange-yellow-crayola), 0 0 30px var(--orange-yellow-crayola), 0 0 40px var(--orange-yellow-crayola);
+  }
+  to {
+    box-shadow: 0 0 30px var(--orange-yellow-crayola), 0 0 40px var(--orange-yellow-crayola), 0 0 50px var(--orange-yellow-crayola), 0 0 60px var(--orange-yellow-crayola);
+  }
+}
+
+@keyframes moon-animation {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input:checked + .slider {
+  background-color: var(--orange-yellow-crayola);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+  content: url('../images/sun-icon.svg');
+}
 
 
 
+
+
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sun-icon, .moon-icon {
+  position: absolute;
+
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: var(--transition-1);
+}
+
+
+.moon-icon {
+  right: 10px;
+}
+
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /*-----------------------------------*\
   #RESET
@@ -260,6 +500,13 @@ article.active {
 .h5 {
   color: var(--white-2);
   text-transform: capitalize;
+}
+
+[data-theme='bright'] .h2,
+[data-theme='bright'] .h3,
+[data-theme='bright'] .h4,
+[data-theme='bright'] .h5 {
+  color: var(--heading-bright);
 }
 
 .h2 { font-size: var(--fs-1); }
@@ -480,9 +727,47 @@ main {
 
 .social-item .social-link:hover { color: var(--light-gray); }
 
+/* Toggle Switch */
 
+/* Removed duplicate .switch class definition */
 
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--light-gray-70);
+  transition: var(--transition-1);
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--white-1);
+  transition: var(--transition-1);
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--orange-yellow-crayola);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
 
 /*-----------------------------------*\
   #NAVBAR
@@ -499,6 +784,11 @@ main {
   border-radius: 12px 12px 0 0;
   box-shadow: var(--shadow-2);
   z-index: 5;
+}
+
+.main-content {
+  position: relative;
+  overflow: visible; /* Ensure the toggle bar is not clipped */
 }
 
 .navbar-list {
@@ -757,7 +1047,7 @@ main {
 
 
 /**
- * #clients 
+ * #clients
  */
 
 .clients { margin-bottom: 15px; }
@@ -782,8 +1072,11 @@ main {
   scroll-snap-align: start;
 }
 
-.clients-item img {
-  width: 100%;
+.clients-item img,
+.professional-certifications img {
+  max-width: 150px; /* Set a maximum width */
+  max-height: 150px; /* Set a maximum height */
+  object-fit: cover; /* Ensure the images maintain their aspect ratio */
   filter: grayscale(1);
   transition: var(--transition-1);
 }
@@ -846,6 +1139,10 @@ main {
   background: var(--jet);
 }
 
+[data-theme='bright'] .timeline-item:not(:last-child)::before {
+  background: var(--light-gray); /* Changed background color to light gray for better visibility in bright mode */
+}
+
 .timeline-item::after {
   content: "";
   position: absolute;
@@ -900,6 +1197,42 @@ main {
   background: var(--text-gradient-yellow);
   height: 100%;
   border-radius: inherit;
+}
+
+.width-10 {
+  width: 10%;
+}
+
+.width-40 {
+  width: 40%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.width-60 {
+  width: 60%;
+}
+
+.width-70 {
+  width: 70%;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+.width-85 {
+  width: 85%;
+}
+
+[data-theme='bright'] .skill-progress-bg {
+  background: var(--bg-bright); /* Changed background color to match bright mode */
+}
+
+[data-theme='bright'] .skill-progress-fill {
+  background: var(--vegas-gold); /* Changed fill color to match bright mode */
 }
 
 
@@ -1063,24 +1396,45 @@ main {
 
 section #resume-download {
   text-align: center;
-  background-color: white;
+  background-color: var(--eerie-black-2); /* Darker background color */
+  padding: 4rem 0; /* Increased padding for more gaps */
 }
 
 section #resume-download h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem; /* Increased margin for more gaps */
+  color: var(--white-1); /* White text color */
+  position: relative;
+  padding-bottom: 7px;
+}
+
+section #resume-download h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: var(--orange-yellow-crayola); /* Bright accent color */
+  border-radius: 3px;
 }
 
 section #resume-download a {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #000; /* Black background color */
-  color: #fff; /* White text color */
+  padding: 1.5rem 3rem; /* Increased padding for a more stylish button */
+  background-color: var(--orange-yellow-crayola); /* Bright accent color */
+  color: var(--white-1); /* White text color */
   text-decoration: none;
-  border-radius: 0.25rem;
+  border-radius: 1.5rem; /* Increased border radius for a more stylish button */
+  font-weight: var(--fw-500);
+  transition: background-color var(--transition-1), transform var(--transition-1);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* Added box shadow for a more stylish button */
+  margin: 0 auto; /* Center the button */
 }
 
 section #resume-download a:hover {
-  background-color: #333; /* Darker black background color on hover */
+  background-color: var(--vegas-gold);
+  transform: scale(1.2); /* Increased scale for a more stylish hover effect */
 }
 
 
@@ -1696,6 +2050,50 @@ textarea.form-input::-webkit-resizer { display: none; }
   
 }
 
+/* Styles for the toggle mechanism with sun and moon icons */
+.tdnn {
+  position: relative;
+  width: var(--toggleWidth);
+  height: var(--toggleHeight);
+  background: var(--toggleBtn-bgColor--night);
+  border-radius: var(--toggleBtnRadius);
+  cursor: pointer;
+  transition: background 0.5s ease;
+}
+
+.moon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6em;
+  height: 6em;
+  background: var(--mooncolor);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.5s ease;
+}
+
+.tdnn.day {
+  background: var(--toggleBtn-bgColor--day);
+}
+
+.tdnn.day .moon {
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.tdnn.day::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6em;
+  height: 6em;
+  background: var(--mooncolor);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.5s ease;
+}
+
 
 
 
@@ -1934,4 +2332,225 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .timeline-text { max-width: 700px; }
 
+}
+
+[data-theme="bright"] {
+  --bg-gradient-onyx: var(--bg-bright-gradient);
+  --bg-gradient-jet: var(--bg-bright);
+  --border-gradient-onyx: var(--border-bright);
+  --text-gradient-yellow: var(--text-dark);
+  --jet: var(--bg-bright);
+  --onyx: var(--bg-bright);
+  --eerie-black-1: var(--bg-bright);
+  --eerie-black-2: var(--bg-bright);
+  --smoky-black: var(--bg-bright);
+  --white-1: var(--text-dark);
+  --white-2: var(--text-dark);
+  --orange-yellow-crayola: var(--text-dark);
+  --vegas-gold: var(--text-dark);
+  --light-gray: var(--text-dark);
+  --light-gray-70: var(--text-dark);
+  --bittersweet-shimmer: var(--text-dark);
+  --shadow-1: 0 0 10px rgba(0, 0, 0, 0.1);
+  --shadow-2: 0 0 15px rgba(0, 0, 0, 0.1);
+  --shadow-3: 0 0 20px rgba(0, 0, 0, 0.1);
+  --shadow-4: 0 0 25px rgba(0, 0, 0, 0.1);
+  --shadow-5: 0 0 30px rgba(0, 0, 0, 0.1);
+  --text-color: var(--text-dark);
+  --background-color: var(--bg-bright);
+  --link-color: var(--text-dark);
+  --border-color: var(--border-bright);
+  --button-background: var(--bg-bright);
+  --button-text-color: var(--text-dark);
+  --button-hover-background: var(--bg-bright);
+  --button-hover-text-color: var(--text-dark);
+}
+
+[data-theme="bright"] body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+[data-theme="bright"] a {
+  color: var(--link-color);
+}
+
+[data-theme="bright"] .sidebar,
+[data-theme="bright"] article {
+  background: var(--background-color);
+  border-color: var(--border-color);
+}
+
+[data-theme="bright"] .button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+}
+
+[data-theme="bright"] .button:hover {
+  background-color: var(--button-hover-background);
+  color: var(--button-hover-text-color);
+}
+
+/* Add more rules as necessary for other elements */
+
+@media (max-width: 450px) {
+  .sidebar, article {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .navbar {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .navbar-link {
+    font-size: 12px;
+  }
+
+  .toggle-container {
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 28px;
+  }
+
+  .slider:before {
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+  }
+
+  .sun-icon, .moon-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .main-content {
+    margin: 10px;
+  }
+
+  .article-title {
+    font-size: 20px;
+  }
+
+  .about-text, .service-item-text, .testimonials-text, .modal-content p, .blog-text {
+    font-size: 14px;
+  }
+
+  .project-img {
+    height: 150px;
+  }
+
+  .contact-form {
+    padding: 10px;
+  }
+
+  .form-input {
+    font-size: 14px;
+  }
+
+  .form-btn {
+    font-size: 14px;
+  }
+}
+
+/* Bot Interface Styles */
+.bot-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 300px;
+  max-height: 400px;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 10px;
+  box-shadow: var(--shadow-2);
+  display: flex;
+  flex-direction: column;
+  z-index: 100020;
+  background-color: yellow; /* High-contrast background color for visibility */
+}
+
+.bot-header {
+  background: var(--onyx);
+  padding: 10px;
+  border-bottom: 1px solid var(--jet);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.bot-title {
+  color: var(--white-2);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-500);
+}
+
+.bot-close {
+  color: var(--white-2);
+  font-size: var(--fs-4);
+  cursor: pointer;
+}
+
+.bot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.user {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  align-self: flex-end;
+}
+
+.bot {
+  background: var(--eerie-black-1);
+  color: var(--white-2);
+  align-self: flex-start;
+}
+
+.bot-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid var(--jet);
+  border-radius: 0 0 10px 10px;
+}
+
+#botInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--jet);
+  border-radius: 5px;
+  background: var(--eerie-black-2);
+  color: var(--white-2);
+}
+
+#botInput::placeholder {
+  color: var(--light-gray-70);
+}
+
+.bot-input button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  cursor: pointer;
+  transition: background var(--transition-1);
+}
+
+.bot-input button:hover {
+  background: var(--vegas-gold);
 }

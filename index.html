@@ -101,29 +101,43 @@
 <i class="bx bx-link-alt"></i>
 </a>
 </li>
+<!-- Removed toggle switch from sidebar -->
 </ul>
 </div>
 </aside>
-<div class=main-content>
-<nav class=navbar>
-<ul class=navbar-list>
-<li class=navbar-item>
-<button class="navbar-link active" data-nav-link>About</button>
-</li>
-<li class=navbar-item>
-<button class=navbar-link data-nav-link>Resume</button>
-</li>
-<li class=navbar-item>
-<a href=https://github.com/kasinadhsarma class=navbar-link data-nav-link>Projects</a>
-</li>
-<li class=navbar-item>
-<a href=https://blogs.kasinadhsarma.in/ class=navbar-link data-nav-link>Blog</a>
-</li>
-<li class=navbar-item>
-<button class=navbar-link data-nav-link>Contact</button>
-</li>
-</ul>
-</nav>
+<div class="main-content">
+  <nav class=navbar>
+    <ul class=navbar-list>
+      <li class=navbar-item>
+        <button class="navbar-link active" data-nav-link>About</button>
+      </li>
+      <li class=navbar-item>
+        <button class=navbar-link data-nav-link>Resume</button>
+      </li>
+      <li class=navbar-item>
+        <a href=https://github.com/kasinadhsarma class=navbar-link data-nav-link>Projects</a>
+      </li>
+      <li class=navbar-item>
+        <a href=https://blogs.kasinadhsarma.in/ class=navbar-link data-nav-link>Blog</a>
+      </li>
+      <li class=navbar-item>
+        <button class=navbar-link data-nav-link>Contact</button>
+      </li>
+    </ul>
+  </nav>
+  <!-- Added toggle switch to the specified location with curved design -->
+  <div class="toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="mode-toggle">
+      <span class="slider round">
+        <img src="./assets/img/moon-icon.svg" alt="Moon Icon" class="icon moon-icon">
+        <img src="./assets/img/sun-icon.svg" alt="Sun Icon" class="icon sun-icon">
+      </span>
+    </label>
+    <div class="tdnn">
+      <div class="moon"></div>
+    </div>
+  </div>
 <article class="about active" data-page=about>
 <header>
 <h2 class="h2 article-title">About me</h2>
@@ -208,7 +222,7 @@ Richard was hired to create a corporate identity. We were very pleased with the 
 </section>
 </div>
 <section class=clients>
-<h3 class="h3 clients-title">Work Expereince Certifications</h3>
+<h3 class="h3 clients-title">Work Experience Certifications</h3>
 <ul class="clients-list has-scrollbar">
 <li class=clients-item>
 <a href=https://github.com/Exploit0xfffff/Intelrepo>
@@ -566,12 +580,10 @@ Exploit0xffff is my own organization dedicated to research and development in cy
 </ul>
 </section>
 <section id=resume-download>
-<header>
-<header>
-<h2 class="h2 article-title">Resume Download</h2>
-<a href=./assets/Resume_kasinadh.pdf download class=download-button>Download Resume</a>
-</header>
-</header>
+  <header>
+    <h2 class="h2 article-title">Resume Download</h2>
+    <a href=./assets/Resume_kasinadh.pdf download class=download-button>Download Resume</a>
+  </header>
 </section>
 </article>
 <article class=projects data-page=projects>
@@ -616,113 +628,66 @@ Exploit0xffff is my own organization dedicated to research and development in cy
 </ul>
 </div>
 <ul class=project-list>
-<li class="project-item active" data-filter-item data-category="Cyber Security">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
+<!-- Removed project items as per user's request -->
+<li class="project-item active" data-filter-item data-category="applications">
+<a href="#">
+<figure class="project-img">
+<div class="project-item-icon-box">
+<ion-icon name="eye-outline"></ion-icon>
 </div>
-<img src=./assets/images/project-1.jpg alt=finance loading=lazy>
+<img src="./assets/images/jobsforfreshers.png" alt="Jobsforfreshers" loading="lazy">
 </figure>
-<h3 class=project-title>Finance</h3>
-<p class=project-category>Cyber Security</p>
+<h3 class="project-title">Jobsforfreshers</h3>
+<p class="project-category">Applications</p>
 </a>
 </li>
 <li class="project-item active" data-filter-item data-category="Cyber Security">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
+<a href="#">
+<figure class="project-img">
+<div class="project-item-icon-box">
+<ion-icon name="eye-outline"></ion-icon>
 </div>
-<img src=./assets/images/project-2.png alt=orizon loading=lazy>
+<img src="./assets/images/cybersecuritygpt.png" alt="CyberSecurityGPT" loading="lazy">
 </figure>
-<h3 class=project-title>Orizon</h3>
-<p class=project-category>Cyber Security</p>
+<h3 class="project-title">CyberSecurityGPT</h3>
+<p class="project-category">Cyber Security</p>
 </a>
 </li>
-<li class="project-item active" data-filter-item data-category="web design">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-3.jpg alt=fundo loading=lazy>
-</figure>
-<h3 class=project-title>Fundo</h3>
-<p class=project-category>Web design</p>
-</a>
+<li class="project-item active" data-filter-item data-category="Cyber Security">
+  <a href="#">
+    <figure class="project-img">
+      <div class="project-item-icon-box">
+        <ion-icon name="eye-outline"></ion-icon>
+      </div>
+      <img src="./assets/images/vulnerability-book.png" alt="Vulnerability-Book" loading="lazy">
+    </figure>
+    <h3 class="project-title">Vulnerability-Book</h3>
+    <p class="project-category">Cyber Security</p>
+  </a>
 </li>
-<li class="project-item active" data-filter-item data-category=applications>
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-4.png alt=brawlhalla loading=lazy>
-</figure>
-<h3 class=project-title>Brawlhalla</h3>
-<p class=project-category>Applications</p>
-</a>
+<li class="project-item active" data-filter-item data-category="Cyber Security">
+  <a href="#">
+    <figure class="project-img">
+      <div class="project-item-icon-box">
+        <ion-icon name="eye-outline"></ion-icon>
+      </div>
+      <img src="./assets/images/jarvis.png" alt="Jarvis" loading="lazy">
+    </figure>
+    <h3 class="project-title">Jarvis</h3>
+    <p class="project-category">Cyber Security</p>
+  </a>
 </li>
-<li class="project-item active" data-filter-item data-category="web design">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-5.png alt=dsm. loading=lazy>
-</figure>
-<h3 class=project-title>DSM.</h3>
-<p class=project-category>Web design</p>
-</a>
-</li>
-<li class="project-item active" data-filter-item data-category="web design">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-6.png alt=metaspark loading=lazy>
-</figure>
-<h3 class=project-title>MetaSpark</h3>
-<p class=project-category>Web design</p>
-</a>
-</li>
-<li class="project-item active" data-filter-item data-category="web development">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-7.png alt=summary loading=lazy>
-</figure>
-<h3 class=project-title>Summary</h3>
-<p class=project-category>Web development</p>
-</a>
-</li>
-<li class="project-item active" data-filter-item data-category=applications>
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-8.jpg alt="task manager" loading=lazy>
-</figure>
-<h3 class=project-title>Task Manager</h3>
-<p class=project-category>Applications</p>
-</a>
-</li>
-<li class="project-item active" data-filter-item data-category="web development">
-<a href=#>
-<figure class=project-img>
-<div class=project-item-icon-box>
-<ion-icon name=eye-outline></ion-icon>
-</div>
-<img src=./assets/images/project-9.png alt=arrival loading=lazy>
-</figure>
-<h3 class=project-title>Arrival</h3>
-<p class=project-category>Web development</p>
-</a>
+<li class="project-item active" data-filter-item data-category="Cyber Security">
+  <a href="#">
+    <figure class="project-img">
+      <div class="project-item-icon-box">
+        <ion-icon name="eye-outline"></ion-icon>
+      </div>
+      <img src="./assets/images/cyber-city.png" alt="Cyber City" loading="lazy">
+    </figure>
+    <h3 class="project-title">Cyber City</h3>
+    <p class="project-category">Cyber Security</p>
+  </a>
 </li>
 </ul>
 </section>
@@ -745,5 +710,35 @@ Exploit0xffff is my own organization dedicated to research and development in cy
 <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
 <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
 <script src=./assets/js/obfuscated.js></script>
-</article></div></main></body>
+<script src=./assets/js/toggle-mode.js></script>
+<script src=./assets/js/portfolio-bot.js></script>
+</article></div></main>
+
+<!-- Bot Interface -->
+
+<!--
+<div class="bot-toggle-circle" onclick="toggleBot()">
+    <img src="./assets/images/neutral-emoji.png" alt="Neutral Emoji" class="emoji-icon">
+</div>
+<div class="bot-container">
+    <div class="bot-header">
+        <div class="bot-title">Assistant Bot</div>
+        <div class="bot-close" onclick="toggleBot()">&times;</div>
+    </div>
+    <div class="bot-messages" id="botMessages">
+-->  
+      <!-- Messages will appear here -->
+<!--
+    </div>
+    <div class="bot-input">
+        <input type="text" id="botInput" placeholder="Type a message...">
+        <button id="sendMessageButton" onclick="sendMessage()">Send</button>
+    </div>
+    <div class="bot-emoji">
+        <img src="./assets/images/neutral-emoji.png" alt="Neutral Emoji" class="emoji-icon">
+    </div>
+</div>
+-->
+<!-- Removed inline script to prevent conflicts with portfolio-bot.js -->
+</body>
 </html>
