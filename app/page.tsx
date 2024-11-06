@@ -1,188 +1,194 @@
 "use client"
 
-import * as React from "react"
-import { useState } from "react"
-import { TypeAnimation } from "react-type-animation"
-import Image from "next/image"
+import React, { useEffect } from 'react'
+import { TypeAnimation } from 'react-type-animation'
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Progress } from "../components/ui/progress"
+import { GithubIcon, LinkedinIcon, MailIcon, TwitterIcon } from "lucide-react"
+import Image from 'next/image'
+import { useState } from 'react'
 
 export default function EnhancedDeveloperPortfolio() {
-  // State and data declarations (existing code)
-  const [activeTab, setActiveTab] = useState("about")
+  const [activeTab, setActiveTab] = useState('about')
 
+  // Data arrays
   const skills = [
     { name: "React/Next.js", level: 90 },
     { name: "TypeScript", level: 85 },
-    { name: "Node.js", level: 80 },
-    { name: "Python", level: 85 },
-    { name: "DevOps/CI/CD", level: 75 },
-    { name: "Security", level: 80 }
+    { name: "Node.js", level: 85 },
+    { name: "Python", level: 80 },
+    { name: "DevOps", level: 75 },
+    { name: "Security", level: 70 }
   ]
 
   const projects = [
     {
-      name: "Cloud Automation",
+      name: "Project 1",
+      category: "Web Development",
+      description: "Modern web application built with React and Next.js",
+      image: "/projects/project1.jpg"
+    },
+    {
+      name: "Project 2",
       category: "DevOps",
-      image: "/projects/cloud-automation.jpg"
+      description: "CI/CD pipeline implementation with GitHub Actions",
+      image: "/projects/project2.jpg"
     },
     {
-      name: "E-commerce Platform",
-      category: "Full Stack",
-      image: "/projects/ecommerce.jpg"
-    },
-    {
-      name: "Threat Detection System",
+      name: "Project 3",
       category: "Security",
-      image: "/projects/threat-detection.jpg"
+      description: "Security analysis and penetration testing tools",
+      image: "/projects/project3.jpg"
     }
   ]
 
   const experience = [
     {
-      title: "EDZU - Internship",
-      period: "December 2023 - March 2024",
-      description: "Successfully executed penetration testing and participated in development tasks, enhancing expertise in security technology."
+      title: "Senior Developer",
+      period: "2022 - Present",
+      description: "Leading development of enterprise applications using React and Node.js"
     },
     {
-      title: "Machine Learning Training",
-      period: "September 2023 - November 2023",
-      description: "Completed comprehensive machine learning training program. Learned about various ML projects and their implementation."
+      title: "DevOps Engineer",
+      period: "2020 - 2022",
+      description: "Implemented CI/CD pipelines and managed cloud infrastructure"
+    },
+    {
+      title: "Security Researcher",
+      period: "2018 - 2020",
+      description: "Conducted security audits and implemented security measures"
     }
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 p-4 md:p-8">
-      {/* Animated Background - existing code */}
+    <div className="min-h-screen bg-gray-900 text-gray-100 responsive-padding">
+      {/* Animated Background */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -inset-[10px] opacity-50">
-          <div className="absolute mix-blend-multiply filter blur-xl top-0 -left-4 w-96 h-96 bg-purple-500 rounded-full animate-blob"></div>
-          <div className="absolute mix-blend-multiply filter blur-xl top-0 -right-4 w-96 h-96 bg-yellow-500 rounded-full animate-blob animation-delay-2000"></div>
-          <div className="absolute mix-blend-multiply filter blur-xl -bottom-8 left-20 w-96 h-96 bg-pink-500 rounded-full animate-blob animation-delay-4000"></div>
+        <div className="absolute inset-0">
+          <div className="absolute mix-blend-screen top-0 -left-4 w-96 h-96 bg-purple-500/80 rounded-full animate-blob"></div>
+          <div className="absolute mix-blend-screen top-0 -right-4 w-96 h-96 bg-yellow-500/80 rounded-full animate-blob animation-delay-2000"></div>
+          <div className="absolute mix-blend-screen -bottom-8 left-20 w-96 h-96 bg-pink-500/80 rounded-full animate-blob animation-delay-4000"></div>
         </div>
       </div>
-
-      {/* Header and Social Links - existing code */}
-      <header className="text-center mb-12 relative z-10">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 glitch" data-text="Kasinadh Sarma">
-          Kasinadh Sarma
-        </h1>
-        <div className="h-8 md:h-12">
-          <TypeAnimation
-            sequence={["Full Stack Developer", 2000, "DevOps Engineer", 2000, "Security Enthusiast", 2000]}
-            wrapper="span"
-            speed={50}
-            style={{ fontSize: "1.25em", display: "inline-block" }}
-            repeat={Infinity}
-          />
+      {/* Header */}
+      <header className="mb-12 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h1 className="responsive-heading glitch" data-text="Kasinadh Sarma">
+            Kasinadh Sarma
+          </h1>
+          <div className="typing-container">
+            <TypeAnimation
+              sequence={[
+                'Full Stack Developer',
+                1500,
+                'DevOps Engineer',
+                1500,
+                'Security Researcher',
+                1500
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              cursor={true}
+              className="text-xl md:text-2xl text-yellow-400"
+            />
+          </div>
         </div>
       </header>
+
       {/* Social Links */}
       <div className="flex justify-center gap-4 mb-8">
         <Button variant="ghost" size="icon" className="hover:text-purple-400 transition-colors">
-          <Github className="h-5 w-5" />
+          <GithubIcon size={20} />
         </Button>
         <Button variant="ghost" size="icon" className="hover:text-blue-400 transition-colors">
-          <Linkedin className="h-5 w-5" />
+          <LinkedinIcon size={20} />
         </Button>
         <Button variant="ghost" size="icon" className="hover:text-green-400 transition-colors">
-          <Mail className="h-5 w-5" />
+          <MailIcon size={20} />
         </Button>
-        <Button variant="ghost" size="icon" className="hover:text-pink-400 transition-colors">
-          <Twitter className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className="hover:text-cyan-400 transition-colors">
+          <TwitterIcon size={20} />
         </Button>
       </div>
 
       {/* Main Content */}
-      <Tabs defaultValue="about" className="max-w-4xl mx-auto">
-        <TabsList className="grid w-full grid-cols-4 mb-8">
-          <TabsTrigger value="about">About</TabsTrigger>
-          <TabsTrigger value="experience">Experience</TabsTrigger>
-          <TabsTrigger value="skills">Skills</TabsTrigger>
-          <TabsTrigger value="projects">Projects</TabsTrigger>
+      <Tabs defaultValue="about" onValueChange={setActiveTab} className="space-y-4">
+        <TabsList className="grid w-full grid-cols-4 bg-gray-800 rounded-lg p-1">
+          <TabsTrigger value="about" className="data-[state=active]:bg-gray-700">About</TabsTrigger>
+          <TabsTrigger value="experience" className="data-[state=active]:bg-gray-700">Experience</TabsTrigger>
+          <TabsTrigger value="skills" className="data-[state=active]:bg-gray-700">Skills</TabsTrigger>
+          <TabsTrigger value="projects" className="data-[state=active]:bg-gray-700">Projects</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="about">
-          <Card className="bg-gray-800 border-purple-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300">
+        <TabsContent value="about" className="space-y-4">
+          <Card className="bg-gray-800 border-green-500 hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-purple-400">About Me</CardTitle>
+              <CardTitle className="text-green-400">About Me</CardTitle>
             </CardHeader>
-            <CardContent className="text-gray-300">
-              <p>Full Stack Developer and DevOps enthusiast with a passion for building secure, scalable applications. Experienced in modern web technologies and cloud infrastructure.</p>
+            <CardContent>
+              <p className="text-gray-300">
+                Full Stack Developer and DevOps enthusiast with a passion for building secure, scalable applications.
+                Experienced in modern web technologies and cloud infrastructure.
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="experience">
-          <Card className="bg-gray-800 border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 transition-all duration-300">
-            <CardHeader>
-              <CardTitle className="text-yellow-400">Work Experience</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {experience.map((job, index) => (
-                <div key={index} className="relative pl-8 pb-8 group">
-                  <div className="absolute left-0 top-0 w-2 h-full bg-yellow-500 group-hover:bg-green-500 transition-colors duration-300"></div>
-                  <div className="absolute left-0 top-0 w-6 h-6 bg-yellow-500 rounded-full border-4 border-gray-800 group-hover:bg-green-500 transition-colors duration-300"></div>
-                  <h3 className="text-lg font-semibold text-yellow-400 group-hover:text-green-400 transition-colors duration-300">{job.title}</h3>
-                  <p className="text-sm text-gray-400">{job.period}</p>
-                  <p className="mt-2 text-gray-300">{job.description}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+        <TabsContent value="experience" className="space-y-4">
+          {experience.map((job, index) => (
+            <div key={index} className="relative pl-8 pb-8 group">
+              <div className="absolute left-0 top-0 w-2 h-full bg-yellow-500 group-hover:bg-green-500 transition-colors duration-300"></div>
+              <div className="absolute left-0 top-0 w-6 h-6 bg-yellow-500 rounded-full border-4 border-gray-800 group-hover:bg-green-500 transition-colors duration-300"></div>
+              <h3 className="text-lg font-semibold text-yellow-400 group-hover:text-green-400 transition-colors duration-300">{job.title}</h3>
+              <p className="text-sm text-gray-400">{job.period}</p>
+              <p className="mt-2 text-gray-300">{job.description}</p>
+            </div>
+          ))}
         </TabsContent>
 
-        <TabsContent value="skills">
+        <TabsContent value="skills" className="space-y-4">
           <Card className="bg-gray-800 border-red-500 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300">
             <CardHeader>
               <CardTitle className="text-red-400">Technical Skills</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {skills.map((skill, index) => (
-                <div key={index} className="space-y-2">
+                <div key={index} className="space-y-2 group">
                   <div className="flex justify-between">
-                    <span className="text-gray-300">{skill.name}</span>
+                    <span className="text-gray-300 group-hover:text-red-400 transition-colors duration-300">{skill.name}</span>
                     <span className="text-gray-400">{skill.level}%</span>
                   </div>
-                  <div className="relative pt-1">
-                    <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-700">
-                      <div
-                        style={{ width: `${skill.level}%` }}
-                        className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-red-500 to-yellow-500 transition-all duration-300"
-                      ></div>
-                    </div>
-                    <div
-                      style={{ left: `${skill.level}%` }}
-                      className="absolute -top-1 w-4 h-4 rounded-full bg-white border-2 border-red-500 transition-all duration-300"
-                    ></div>
-                  </div>
+                  <Progress value={skill.level} className="h-2 overflow-hidden rounded-full bg-gray-700" indicatorClassName="bg-gradient-to-r from-red-500 via-yellow-500 to-orange-500 transition-all duration-500 ease-in-out" />
                 </div>
               ))}
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="projects">
+        <TabsContent value="projects" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
-              <Card key={index} className="bg-gray-800 border-blue-500 hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 group overflow-hidden">
-                <div className="relative aspect-video overflow-hidden">
+              <Card key={index} className="bg-gray-800 border-blue-500 hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 group">
+                <div className="relative overflow-hidden aspect-video">
                   <Image
                     src={project.image}
                     alt={project.name}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    width={400}
+                    height={300}
+                    className="object-cover rounded-t-lg transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/75 to-purple-500/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button variant="secondary" size="sm" className="bg-white text-gray-900 hover:bg-gray-200">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/80 to-purple-500/80 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center gap-4 p-6">
+                    <h4 className="text-white text-lg font-semibold text-center opacity-0 group-hover:opacity-100 transform -translate-y-4 group-hover:translate-y-0 transition-all duration-500">{project.description}</h4>
+                    <Button variant="secondary" size="sm" className="bg-white text-gray-900 hover:bg-gray-200 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                       View Project
                     </Button>
                   </div>
                 </div>
                 <CardContent className="pt-4">
-                  <h3 className="text-lg font-semibold text-blue-400 group-hover:text-purple-400 transition-colors duration-300">{project.name}</h3>
+                  <h3 className="text-lg font-semibold text-blue-400 group-hover:text-green-400 transition-colors duration-300">{project.name}</h3>
                   <p className="text-sm text-gray-400">{project.category}</p>
                 </CardContent>
               </Card>

@@ -57,5 +57,18 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow-glitch': {
+          textShadow: '-2px 0 #ff00c1',
+        },
+        '.text-shadow-glitch2': {
+          textShadow: '-2px 0 #00fff9, 2px 2px #ff00c1',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }
