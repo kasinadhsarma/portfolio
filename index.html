@@ -9,6 +9,7 @@
     <title>Kasinadhsarma</title>
     <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/visionai.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -40,7 +41,7 @@
                         </div>
                         <div class="contact-info">
                             <p class="contact-title">Email</p>
-                            <a href="mailto:[REDACTED SECRET]" class="contact-link">[REDACTED SECRET]</a>
+                            <a href="mailto:kasinadhsarma@gmail.com" class="contact-link">kasinadhsarma@gmail.com</a>
                         </div>
                     </li>
                     <li class="contact-item">
@@ -598,39 +599,51 @@
                     <h2 class="h2 article-title">Blog</h2>
                 </header>
             </article>
-            
+
         </div>
     </main>
-        <script src=./assets/js/main.js></script>
-          <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
-          <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
-          <script src=./assets/js/obfuscated.js></script>
-          <script src=./assets/js/toggle-mode.js></script>
-          <script src=./assets/js/portfolio-bot.js></script>
-        </article>
-      </div>
-    </main>
-    <!-- Bot Interface -->
+    <script src="./assets/js/main.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./assets/js/obfuscated.js"></script>
+    <script src="./assets/js/toggle-mode.js"></script>
+    <script src="./assets/js/portfolio-bot.js"></script>
 
-<div class="bot-toggle-circle" onclick="toggleBot()">
-    <img src="./assets/images/neutral-emoji.png" alt="Neutral Emoji" class="emoji-icon">
-</div>
-<div class="bot-container">
-    <div class="bot-header">
-        <div class="bot-title">VisionAI Assistant</div>
-        <div class="bot-close" onclick="toggleBot()">&times;</div>
+    <!-- VisionAI Chat Interface -->
+    <div class="visionai-chat-container" id="visionai-chat">
+        <div class="chat-header">
+            <div class="chat-title">
+                <img src="./assets/images/neutral-emoji.png" alt="VisionAI" class="chat-logo">
+                <span>VisionAI Assistant</span>
+            </div>
+            <button class="minimize-btn" onclick="toggleBot()">
+                <ion-icon name="remove-outline"></ion-icon>
+            </button>
+        </div>
+        <div class="chat-messages" id="botMessages">
+            <!-- Messages will be dynamically added here -->
+            <div class="message bot-message">
+                Hello! I'm VisionAI, your AI assistant. I can help you with questions about AI and development. What would you like to know?
+            </div>
+        </div>
+        <div class="chat-input">
+            <textarea
+                id="botInput"
+                placeholder="Ask me about AI and development..."
+                rows="1"
+                onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); sendMessage(); }"
+            ></textarea>
+            <button class="send-btn" onclick="sendMessage()">
+                <ion-icon name="send"></ion-icon>
+            </button>
+        </div>
     </div>
-    <div class="bot-messages" id="botMessages">
-        <!-- Messages will appear here -->
+
+    <!-- VisionAI Toggle Button -->
+    <div class="visionai-toggle" onclick="toggleBot()">
+        <div class="toggle-circle">
+            <img src="./assets/images/neutral-emoji.png" alt="VisionAI" class="toggle-logo">
+        </div>
     </div>
-    <div class="bot-input">
-        <input type="text" id="botInput" placeholder="Type a message...">
-        <button id="sendMessageButton" onclick="sendMessage()">Send</button>
-    </div>
-    <div class="bot-emoji">
-        <img src="./assets/images/neutral-emoji.png" alt="Neutral Emoji" class="emoji-icon">
-    </div>
-</div>
-<!-- Removed inline script to prevent conflicts with portfolio-bot.js -->
 </body>
 </html>

@@ -1,0 +1,232 @@
+/* VisionAI Chat Interface Styles */
+:root {
+    --visionai-primary: #0366d6;
+    --visionai-bg: #ffffff;
+    --visionai-text: #24292e;
+    --visionai-border: #e1e4e8;
+    --visionai-hover: #f6f8fa;
+    --visionai-shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --visionai-primary: #58a6ff;
+    --visionai-bg: #0d1117;
+    --visionai-text: #c9d1d9;
+    --visionai-border: #30363d;
+    --visionai-hover: #161b22;
+    --visionai-shadow: rgba(0, 0, 0, 0.3);
+}
+
+.visionai-chat-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: var(--visionai-bg);
+    border: 1px solid var(--visionai-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--visionai-shadow);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(120%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.visionai-chat-container.active {
+    transform: translateY(0);
+}
+
+.chat-header {
+    padding: 12px;
+    border-bottom: 1px solid var(--visionai-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--visionai-text);
+}
+
+.chat-logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.minimize-btn {
+    background: none;
+    border: none;
+    color: var(--visionai-text);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.minimize-btn:hover {
+    background: var(--visionai-hover);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+    white-space: pre-wrap;
+}
+
+.bot-message {
+    background: var(--visionai-hover);
+    color: var(--visionai-text);
+    margin-right: auto;
+}
+
+.user-message {
+    background: var(--visionai-primary);
+    color: white;
+    margin-left: auto;
+}
+
+.chat-input {
+    padding: 12px;
+    border-top: 1px solid var(--visionai-border);
+    display: flex;
+    gap: 8px;
+}
+
+#botInput {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--visionai-border);
+    border-radius: 6px;
+    background: var(--visionai-bg);
+    color: var(--visionai-text);
+    resize: none;
+    min-height: 38px;
+    max-height: 120px;
+    font-family: inherit;
+}
+
+.send-btn {
+    background: var(--visionai-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.send-btn:hover {
+    opacity: 0.9;
+}
+
+.visionai-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.toggle-circle {
+    width: 48px;
+    height: 48px;
+    background: var(--visionai-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px var(--visionai-shadow);
+    transition: transform 0.3s ease;
+}
+
+.toggle-circle:hover {
+    transform: scale(1.1);
+}
+
+.toggle-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+/* Loading Animation */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 8px 12px;
+    background: var(--visionai-hover);
+    border-radius: 8px;
+    width: fit-content;
+    margin-bottom: 12px;
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background: var(--visionai-text);
+    border-radius: 50%;
+    animation: typing 1s infinite;
+    opacity: 0.4;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* Scrollbar Styles */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: var(--visionai-bg);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--visionai-border);
+    border-radius: 4px;
+}
+
+/* Message Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .visionai-chat-container {
+        width: calc(100% - 40px);
+        height: calc(100vh - 120px);
+        bottom: 70px;
+    }
+
+    .visionai-toggle {
+        bottom: 10px;
+        right: 10px;
+    }
+}
