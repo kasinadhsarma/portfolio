@@ -22,39 +22,32 @@ function displayMessage(message, sender) {
     messageContainer.scrollIntoView();
 }
 
-// Function to get bot response based on user input
-function getBotResponse(message) {
-    const responses = {
-        'hello': { text: 'Hi there! How can I help you today?', emotion: 'happy' },
-        'hi': { text: 'Hi! How can I assist you today?', emotion: 'happy' },
-        'help': { text: 'Sure, I am here to help! What do you need assistance with?', emotion: 'neutral' },
-        'portfolio': { text: 'This is my portfolio. You can find information about my projects, skills, and contact details here.', emotion: 'neutral' },
-        'projects': { text: 'I have worked on various projects including AI models, cybersecurity applications, and more.', emotion: 'neutral' },
-        'web development': { text: 'I am fully immersed in the world of web development, refining my skills in Python and JavaScript for backend development. My journey involves crafting my own website, integrating cutting-edge technology, and embracing the full spectrum of full-stack web development.', emotion: 'happy' },
-        'contact': { text: 'You can contact me via email at kasinadhsarma@gmail.com or through the contact form on this page.', emotion: 'neutral' },
-        'skills': { text: 'I have skills in web development, AI, cybersecurity, and more. Feel free to ask about any specific skill!', emotion: 'neutral' },
-        'experience': { text: 'I have experience working on various projects in web development, AI, and cybersecurity. Check out my projects section for more details.', emotion: 'neutral' },
-        'education': { text: 'I have a background in computer science and have completed various courses and certifications in web development, AI, and cybersecurity.', emotion: 'neutral' },
-        'default': { text: 'I am not sure how to respond to that. Can you please rephrase your question?', emotion: 'neutral' }
-    };
+// Function to get bot response from API
+async function getBotResponse(message) {
+    console.log(`Sending message to API: ${message}`);
+    try {
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: message })
+        });
 
-    const keywords = Object.keys(responses);
-    let response = responses['default'];
-
-    console.log(`User message: ${message}`);
-    for (let keyword of keywords) {
-        if (message.toLowerCase().includes(keyword)) {
-            response = responses[keyword];
-            console.log(`Matched keyword: ${keyword}`);
-            console.log(`Selected response: ${response.text}`);
-            break;
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    }
 
-    setTimeout(() => {
-        displayMessage(response.text, 'bot');
-        expressEmotion(response.emotion);
-    }, 1000);
+        const data = await response.json();
+        console.log('API Response:', data);
+
+        displayMessage(data.response, 'bot');
+        expressEmotion(data.emotion);
+    } catch (error) {
+        console.error('Error:', error);
+        displayMessage('I apologize, but I encountered an error. As VisionAI, I aim to provide better assistance. Please try again.', 'bot');
+        expressEmotion('sad');
+    }
 }
 
 // Function to express emotions
