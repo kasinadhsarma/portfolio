@@ -1,63 +1,92 @@
-// Portfolio Bot JavaScript
+// VisionAI Chat Interface JavaScript
 
 // Function to handle sending messages
 function sendMessage() {
     console.log('sendMessage function triggered');
     const input = document.getElementById('botInput');
     const message = input.value.trim();
+
     if (message) {
-        displayMessage(message, 'user');
+        displayMessage(message, 'user-message');
         input.value = '';
+        // Reset textarea height
+        input.style.height = 'auto';
         getBotResponse(message);
     }
 }
 
 // Function to display messages in the chat
-function displayMessage(message, sender) {
-    console.log(`Displaying message: ${message} from ${sender}`);
+function displayMessage(message, className) {
+    console.log(`Displaying message: ${message} with class ${className}`);
     const messageContainer = document.createElement('div');
-    messageContainer.classList.add('message', sender);
+    messageContainer.classList.add('message', className);
     messageContainer.textContent = message;
     document.getElementById('botMessages').appendChild(messageContainer);
-    messageContainer.scrollIntoView();
+    messageContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Function to get bot response based on user input
-function getBotResponse(message) {
-    const responses = {
-        'hello': { text: 'Hi there! How can I help you today?', emotion: 'happy' },
-        'hi': { text: 'Hi! How can I assist you today?', emotion: 'happy' },
-        'help': { text: 'Sure, I am here to help! What do you need assistance with?', emotion: 'neutral' },
-        'portfolio': { text: 'This is my portfolio. You can find information about my projects, skills, and contact details here.', emotion: 'neutral' },
-        'projects': { text: 'I have worked on various projects including AI models, cybersecurity applications, and more.', emotion: 'neutral' },
-        'web development': { text: 'I am fully immersed in the world of web development, refining my skills in Python and JavaScript for backend development. My journey involves crafting my own website, integrating cutting-edge technology, and embracing the full spectrum of full-stack web development.', emotion: 'happy' },
-        'contact': { text: 'You can contact me via email at kasinadhsarma@gmail.com or through the contact form on this page.', emotion: 'neutral' },
-        'skills': { text: 'I have skills in web development, AI, cybersecurity, and more. Feel free to ask about any specific skill!', emotion: 'neutral' },
-        'experience': { text: 'I have experience working on various projects in web development, AI, and cybersecurity. Check out my projects section for more details.', emotion: 'neutral' },
-        'education': { text: 'I have a background in computer science and have completed various courses and certifications in web development, AI, and cybersecurity.', emotion: 'neutral' },
-        'default': { text: 'I am not sure how to respond to that. Can you please rephrase your question?', emotion: 'neutral' }
-    };
+// Function to get bot response from API
+async function getBotResponse(message) {
+    console.log(`Sending message to API: ${message}`);
+    showTypingIndicator();
 
-    const keywords = Object.keys(responses);
-    let response = responses['default'];
+    try {
+        const response = await fetch('http://localhost:8000/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                text: message,
+                context: 'portfolio',
+                user_info: {
+                    name: 'User',
+                    interests: ['AI', 'Development', 'Technology']
+                }
+            })
+        });
 
-    console.log(`User message: ${message}`);
-    for (let keyword of keywords) {
-        if (message.toLowerCase().includes(keyword)) {
-            response = responses[keyword];
-            console.log(`Matched keyword: ${keyword}`);
-            console.log(`Selected response: ${response.text}`);
-            break;
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    }
 
-    setTimeout(() => {
-        displayMessage(response.text, 'bot');
-        expressEmotion(response.emotion);
-    }, 1000);
+        const data = await response.json();
+        console.log('API Response:', data);
+
+        hideTypingIndicator();
+
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        displayMessage(data.response, 'bot-message');
+        expressEmotion(data.emotion || 'neutral');
+    } catch (error) {
+        console.error('Error:', error);
+        hideTypingIndicator();
+        displayMessage('I apologize, but I encountered an error. As VisionAI, I aim to provide better assistance. Please try again.', 'bot-message');
+        expressEmotion('sad');
+    }
 }
 
-// Function to express emotions
+// Function to show typing indicator
+function showTypingIndicator() {
+    const indicator = document.createElement('div');
+    indicator.classList.add('typing-indicator');
+    indicator.innerHTML = '<span></span><span></span><span></span>';
+    document.getElementById('botMessages').appendChild(indicator);
+    indicator.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function to hide typing indicator
+function hideTypingIndicator() {
+    const indicator = document.querySelector('.typing-indicator');
+    if (indicator) {
+        indicator.remove();
+    }
+}
+
+// Function to express emotions through emoji
 function expressEmotion(emotion) {
     const emojiMap = {
         'happy': './assets/images/happy-emoji.png',
@@ -67,19 +96,48 @@ function expressEmotion(emotion) {
     };
 
     const emojiSrc = emojiMap[emotion.toLowerCase()] || emojiMap['neutral'];
-    const botToggleCircle = document.querySelector('.bot-toggle-circle');
-    botToggleCircle.innerHTML = `<img src="${emojiSrc}" alt="${emotion} Emoji" class="emoji-icon">`;
+    const chatLogo = document.querySelector('.chat-logo');
+    const toggleLogo = document.querySelector('.toggle-logo');
+
+    if (chatLogo) chatLogo.src = emojiSrc;
+    if (toggleLogo) toggleLogo.src = emojiSrc;
 }
 
 // Function to toggle the bot interface
 function toggleBot() {
-    const botContainer = document.querySelector('.bot-container');
-    const botToggleCircle = document.querySelector('.bot-toggle-circle');
-    if (botContainer.style.display === 'none' || botContainer.style.display === '') {
-        botContainer.style.display = 'block';
-        botToggleCircle.innerHTML = ''; // Clear the circle content
-    } else {
-        botContainer.style.display = 'none';
-        botToggleCircle.innerHTML = '<img src="./assets/images/neutral-emoji.png" alt="Neutral Emoji" class="emoji-icon">'; // Add neutral emoji back to the circle
+    const chatContainer = document.querySelector('.visionai-chat-container');
+    if (chatContainer) {
+        const isHidden = chatContainer.style.transform === 'translateY(120%)';
+        chatContainer.style.transform = isHidden ? 'translateY(0)' : 'translateY(120%)';
+        // Reset textarea height when hiding chat
+        if (!isHidden) {
+            document.getElementById('botInput').style.height = 'auto';
+        }
     }
 }
+
+// Function to handle textarea auto-resize
+function initTextareaHandlers() {
+    const textarea = document.getElementById('botInput');
+    if (!textarea) return;
+
+    textarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    // Reset height on focus
+    textarea.addEventListener('focus', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+}
+
+// Initialize the chat interface
+document.addEventListener('DOMContentLoaded', function() {
+    initTextareaHandlers();
+    // Add click handler for toggle button
+    document.querySelector('.visionai-toggle')?.addEventListener('click', toggleBot);
+    // Display welcome message
+    displayMessage('Hello! I\'m VisionAI, your AI assistant. I can help you with questions about AI and development. What would you like to know?', 'bot-message');
+});
