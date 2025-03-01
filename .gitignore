@@ -1,3 +1,39 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+>>>>>>> 37edf6e (Initial portfolio website commit)
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+>>>>>>> 37edf6e (Initial portfolio website commit)
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+>>>>>>> 37edf6e (Initial portfolio website commit)
+.pnpm-debug.log*
+
+# local env files
+.env*
+>>>>>>> 37edf6e (Initial portfolio website commit)
+huggingface
+>>>>>>> 37edf6e (Initial portfolio website commit)
+<<<<<<< HEAD
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+>>>>>>> 37edf6e (Initial portfolio website commit)
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+>>>>>>> 37edf6e (Initial portfolio website commit)
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+>>>>>>> 37edf6e (Initial portfolio website commit)
+.pnpm-debug.log*
+
+# local env files
+.env*
+>>>>>>> 37edf6e (Initial portfolio website commit)
+huggingface
+>>>>>>> 37edf6e (Initial portfolio website commit)
+<<<<<<< HEAD
+=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+>>>>>>> 37edf6e (Initial portfolio website commit)
 # dependencies
 /node_modules
 /.pnp
@@ -21,8 +57,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 
 # local env files
+=======
+.pnpm-debug.log*
+
+# local env files
+.env*
+>>>>>>> 37edf6e (Initial portfolio website commit)
 .env*.local
 
 # vercel
@@ -31,3 +74,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
+=======
+huggingface
+>>>>>>> 37edf6e (Initial portfolio website commit)

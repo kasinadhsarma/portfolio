@@ -1,0 +1,49 @@
+/* Theme transition styles */
+:root {
+  --theme-transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  transition: var(--theme-transition);
+}
+
+/* Theme color variants */
+[data-theme="light"] {
+  --theme-primary: hsl(215, 90%, 50%);
+  --theme-secondary: hsl(40, 20%, 92%);
+  --theme-background: hsl(40, 30%, 99%);
+}
+
+[data-theme="dark"] {
+  --theme-primary: hsl(217, 91%, 60%);
+  --theme-secondary: hsl(217, 50%, 12%);
+  --theme-background: hsl(224, 71%, 4%);
+}
+
+/* Animated theme transition effects */
+.theme-transition-fade {
+  transition: opacity 0.3s ease;
+}
+
+.theme-transition-slide {
+  transition: transform 0.3s ease;
+}
+
+/* Theme switch animation */
+.theme-switch-icon {
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-switch-icon.rotating {
+  animation: rotate 0.5s linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

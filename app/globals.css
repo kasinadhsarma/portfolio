@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Enhanced Global Configuration with Color Mode */
+@layer base {
+  :root {
+    /* Light Mode - Enhanced Skin Tone Gradient Theme */
+    --background: 25 60% 90%; /* Soft peachy beige skin tone */
+    --foreground: 20 25% 10%;
+    
+    --card: 30 50% 95%;
+    --card-foreground: 20 25% 10%;
+    
+    --popover: 30 50% 95%;
+    --popover-foreground: 20 25% 10%;
+    
+    --primary: 30 90% 60%;
+    --primary-foreground: 60 20% 98%;
+    
+    --secondary: 30 40% 85%;
+    --secondary-foreground: 30 20% 20%;
+    
+    --muted: 30 30% 80%;
+    --muted-foreground: 30 20% 50%;
+    
+    --accent: 30 40% 75%;
+    --accent-foreground: 30 20% 20%;
+    
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 60 20% 98%;
+    
+    --border: 30 30% 70%;
+    --input: 30 30% 70%;
+    --ring: 30 90% 60%;
+    
+    --radius: 0.75rem;
+    
+    /* Enhanced Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+    --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+    
+    /* Advanced Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* New Variables */
+    --overlay: 0 0% 0%/0.4;
+    --success: 120 60% 50%;
+    --warning: 45 80% 50%;
+    --info: 210 80% 50%;
+  }
+  
+  .dark {
+    /* Dark Mode - Black/Dark Theme */
+    --background: 0 0% 8%; /* Deep black/gray background */
+    --foreground: 60 15% 98%; /* White/light text */
+    
+    --card: 0 0% 12%; /* Darker card background */
+    --card-foreground: 60 15% 98%;
+    
+    --popover: 0 0% 12%;
+    --popover-foreground: 60 15% 98%;
+    
+    --primary: 200 80% 50%; /* Blueish primary for contrast */
+    --primary-foreground: 60 15% 98%;
+    
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 60 15% 98%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 30 15% 75%;
+    
+    --accent: 0 0% 25%;
+    --accent-foreground: 60 15% 98%;
+    
+    --destructive: 0 60% 40%;
+    --destructive-foreground: 60 15% 98%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 200 80% 50%;
+    
+    --overlay: 0 0% 95%/0.2;
+    --success: 120 60% 45%;
+    --warning: 45 80% 45%;
+    --info: 210 80% 45%;
+  }
+}
+
+@layer base {
+  /* Reset and Base Styles */
+  *, *::before, *::after {
+    @apply box-border border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted)/50%));
+    min-height: 100vh;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Enhanced Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/70 rounded-full border-2 border-background transition-all;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+}
+
+@layer components {
+  /* Advanced Retractable Panels */
+  .retractable {
+    @apply transition-all duration-300 ease-out fixed z-50;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .retractable[data-state="closed"] {
+    @apply invisible opacity-0;
+  }
+  
+  .retractable[data-state="open"] {
+    @apply visible opacity-100;
+  }
+  
+  .retractable--left {
+    @apply top-0 left-0 h-full;
+    transform: translateX(-100%);
+  }
+  
+  .retractable--left[data-state="open"] {
+    transform: translateX(0);
+  }
+  
+  .retractable--right {
+    @apply top-0 right-0 h-full;
+    transform: translateX(100%);
+  }
+  
+  .retractable--right[data-state="open"] {
+    transform: translateX(0);
+  }
+  
+  /* Enhanced Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-semibold transition-all;
+    box-shadow: var(--shadow-sm);
+    animation: pulse-subtle 2s infinite;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:shadow-md;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent border border-border hover:bg-muted/50 hover:shadow-sm;
+  }
+  
+  .btn-icon {
+    @apply w-10 h-10 p-0 rounded-full;
+  }
+  
+  /* Advanced Card Component for About Me */
+  .card-about {
+    @apply relative rounded-lg bg-card text-card-foreground p-6 overflow-hidden;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .card-about:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl), 0 0 25px hsl(var(--primary)/20%);
+  }
+  
+  /* Dialog/Overlay */
+  .dialog-overlay {
+    @apply fixed inset-0 bg-overlay backdrop-blur-sm;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .dialog-content {
+    @apply fixed bg-card rounded-lg p-6 shadow-2xl;
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  /* Tooltip */
+  .tooltip {
+    @apply absolute px-2 py-1 rounded-md bg-popover text-popover-foreground text-sm;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-8px);
+    transition: all var(--transition-fast);
+  }
+  
+  /* Color Mode Toggle Button */
+  .theme-toggle {
+    @apply inline-flex items-center justify-center w-12 h-6 rounded-full bg-muted cursor-pointer transition-all;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .theme-toggle.active {
+    @apply bg-primary;
+  }
+  
+  .theme-toggle .toggle-ball {
+    @apply absolute w-5 h-5 bg-background rounded-full transition-all;
+    transform: translateX(0);
+  }
+  
+  .theme-toggle.active .toggle-ball {
+    transform: translateX(100%);
+  }
+}
+
+@layer utilities {
+  /* Enhanced Typography */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent;
+  }
+  
+  /* Glassmorphism */
+  .glass-effect {
+    @apply bg-background/70 backdrop-blur-lg border border-border/30;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Advanced Animations */
+  .animate-spin-slow {
+    animation: spin 2s linear infinite;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounce 1s ease-in-out infinite;
+    animation-range: 0 10px;
+  }
+  
+  /* Grid Utilities */
+  .grid-flow-dense {
+    grid-auto-flow: dense;
+  }
+  
+  /* Flex Gap Utilities */
+  .gap-x-05 { column-gap: 0.125rem; }
+  .gap-y-05 { row-gap: 0.125rem; }
+  
+  /* Scroll Snap */
+  .snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+  }
+  
+  .snap-center {
+    scroll-snap-align: center;
+  }
+  
+  /* Text Effects */
+  .text-glow {
+    text-shadow: 0 0 8px hsl(var(--primary)/50%);
+  }
+}
+
+/* Enhanced Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Developer Experience Improvements */
+@layer utilities {
+  /* Debug Utilities */
+  .debug-border {
+    @apply border-2 border-red-500 !important;
+  }
+  
+  .debug-bg {
+    @apply bg-red-500/20 !important;
+  }
+  
+  /* Performance Optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Advanced Media Queries */
+@container (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@supports (display: grid) {
+  .fallback-grid {
+    display: grid;
+  }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: 30 100% 45%;
+    --border: 0 0% 40%;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark {
+    --primary: 200 100% 50%;
+    --border: 0 0% 50%;
+  }
+}
