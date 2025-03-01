@@ -10,6 +10,13 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'komarev.com',
+        pathname: '/ghpvc/**',
+      },
+    ],
   },
   experimental: {
     webpackBuildWorker: true,
