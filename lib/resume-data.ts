@@ -7,18 +7,18 @@ export type ResumeType = {
 export const resumes: ResumeType[] = [
   {
     label: "Cyber Security Resume",
-    path: "public/pdf/CyberSecurity.pdf",
+    path: "/pdf/CyberSecurity.pdf",
   },
   {
     label: "AI & ML Resume",
-    path: "public/pdf/AI_ML.pdf",
+    path: "/pdf/AI_ML.pdf",
   },
   {
     label: "Full Stack Resume",
-    path: "/public/pdf/Full_stack.pdf",
+    path: "/pdf/Full_stack.pdf",
   },
   {
     label: "R&D Resume",
-    path: "/public/pdf/R&D.pdf",
+    path: "/pdf/R&D.pdf",
   }
 ];

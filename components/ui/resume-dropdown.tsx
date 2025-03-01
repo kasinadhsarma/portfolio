@@ -35,7 +35,7 @@ export function ResumeDropdown({
           <DropdownMenuItem key={resume.path} asChild>
             <Link
               href={resume.path}
-              download
+              download={resume.path.split('/').pop()}
               className="flex items-center gap-2 cursor-pointer w-full"
             >
               <FileDown className="h-4 w-4" />
