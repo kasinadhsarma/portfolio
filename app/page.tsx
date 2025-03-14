@@ -97,17 +97,16 @@ export default function HomePage() {
                   </h1>
                   <div className="h-10 mb-8">
                   <TypingEffect
-                    texts={[
-                      "AI Research Scientist",
-                      "Machine Learning Engineer",
-                      "Cybersecurity Specialist",
-                      "Cybersecurity Researcher",
-                      "Hardware Acceleration Developer",
-                      "Quantum Computing Researcher",
-                      "Neural Network Architect",
-                      "Cloud AI Developer",
-                    ]}
-                  />
+                      texts={[
+                        "AI Researcher",
+                        "Machine Learning Researcher",
+                        "Cybersecurity Researcher",
+                        "Quantum Researcher",
+                        "Neural Networking and Cloud AI Researcher & Developer",
+                        "Full Stack Engineer",
+                      ]}
+                    />
+
                 </div>
                 <p className="text-muted-foreground mb-8 max-w-2xl">
                     Bridging the gap between cybersecurity and innovation through cutting-edge research and development.
