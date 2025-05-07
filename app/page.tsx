@@ -134,19 +134,22 @@ export default function HomePage() {
                   </div>
                   <div className="flex gap-4 mt-8 justify-center md:justify-start">
                     <button
+                      aria-label="Visit my GitHub profile"
                       onClick={() => safeOpenUrl(storeAndEncodeUrl("https://github.com/kasinadhsarma"))}
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Github className="h-5 w-5" />
                     </button>
                     <button
+                      aria-label="Visit my LinkedIn profile"
                       onClick={() => safeOpenUrl(storeAndEncodeUrl("https://www.linkedin.com/in/kasinadhsarma"))}
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Linkedin className="h-5 w-5" />
                     </button>
                     <button
-                      onClick={() => safeOpenUrl(storeAndEncodeUrl("https://twitter.com/kasinadhsarma"))}
+                      aria-label="Visit my Twitter profile"
+                      onClick={() => safeOpenUrl(storeAndEncodeUrl("https://x.com/kasinadhsarma"))}
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <X className="h-5 w-5" />
@@ -170,7 +173,7 @@ export default function HomePage() {
                   I'm a cybersecurity enthusiast with a B.Tech in Cyber/Computer Forensics and Counterterrorism from Parul University. My mission is to enhance the cybersecurity and AI landscapes through innovative technologies and solutions.
                 </p>
                 <p className="mb-4 text-foreground dark:text-foreground/90">
-                  My professional journey is defined by projects that push the boundaries of technology. I am currently developing a Super Processing Unit (SPU) that aims to outpace existing processors like CPU, GPU, TPU, NPU, LPU, and XPU. This ambitious project focuses on creating a highly efficient, general-purpose processing unit designed for accelerated training and development.
+                I'm Kasinadh Sarma, a passionate AI and cybersecurity researcher dedicated to exploring the frontiers of intelligent systems and digital defense. With a strong foundation in full-stack development and cloud technologies, I thrive on building impactful, secure, and scalable solutions that bridge innovation with real-world applications.
                 </p>
               </div>
             </div>
