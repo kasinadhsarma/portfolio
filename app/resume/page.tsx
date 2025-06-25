@@ -6,7 +6,7 @@ export default function ResumePage() {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-4xl font-bold mb-8">Resume</h1>
-      
+
       <div className="mb-8">
         <ResumeDropdown />
       </div>
@@ -53,6 +53,22 @@ export default function ResumePage() {
             <Card className="p-4">
               <div className="flex justify-between items-start">
                 <div>
+                  <h3 className="text-xl font-semibold">Junior Developer</h3>
+                  <p className="text-muted-foreground">Ropods Spot • June 2025 — Present</p>
+                </div>
+                <Badge>Current</Badge>
+              </div>
+              <ul className="mt-4 list-disc pl-4 space-y-2">
+                <li>Developing innovative mobile applications using Flutter framework for cross-platform compatibility</li>
+                <li>Creating business automation solutions with Google AppSheet for streamlined workflows</li>
+                <li>Contributing to the company's technology stack modernization and digital transformation initiatives</li>
+                <li>Collaborating with cross-functional teams to deliver high-quality software solutions</li>
+              </ul>
+            </Card>
+
+            <Card className="p-4">
+              <div className="flex justify-between items-start">
+                <div>
                   <h3 className="text-xl font-semibold">Research and Development Lead</h3>
                   <p className="text-muted-foreground">VishwamAI • 2023 — Present</p>
                 </div>
@@ -64,8 +80,8 @@ export default function ResumePage() {
                 <li>Conducting research on AI consciousness and neuro-symbolic integration to develop cognitive models</li>
                 <li>Collaborated with a team to build robust neural network architectures for real-world applications</li>
               </ul>
-              <a 
-                href="https://github.com/VishwamAI" 
+              <a
+                href="https://github.com/VishwamAI"
                 className="text-primary hover:underline mt-2 inline-block"
                 target="_blank"
                 rel="noopener noreferrer"
