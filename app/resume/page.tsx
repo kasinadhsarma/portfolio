@@ -59,8 +59,6 @@ export default function ResumePage() {
                 <Badge>Current</Badge>
               </div>
               <ul className="mt-4 list-disc pl-4 space-y-2">
-                <li>Developing innovative mobile applications using Flutter framework for cross-platform compatibility</li>
-                <li>Creating business automation solutions with Google AppSheet for streamlined workflows</li>
                 <li>Contributing to the company's technology stack modernization and digital transformation initiatives</li>
                 <li>Collaborating with cross-functional teams to deliver high-quality software solutions</li>
               </ul>
