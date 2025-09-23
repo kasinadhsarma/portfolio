@@ -53,7 +53,7 @@ export default function ResumePage() {
             <Card className="p-4">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-xl font-semibold">Junior Developer</h3>
+                  <h3 className="text-xl font-semibold">Junior Engineer</h3>
                   <p className="text-muted-foreground">Ropods Spot • June 2025 — Present</p>
                 </div>
                 <Badge>Current</Badge>
