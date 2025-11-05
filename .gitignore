@@ -27,12 +27,7 @@ huggingface
 # local env files
 .env*
 >>>>>>> 37edf6e (Initial portfolio website commit)
-huggingface
->>>>>>> 37edf6e (Initial portfolio website commit)
-<<<<<<< HEAD
-=======
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+huggisngface
 >>>>>>> 37edf6e (Initial portfolio website commit)
 # dependencies
 /node_modules
