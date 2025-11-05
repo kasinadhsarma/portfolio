@@ -33,6 +33,22 @@ export const certificates: Certificate[] = [
     category: "practical"
   },
   {
+    title: "TryHackMe Profile",
+    issuer: "TryHackMe",
+    date: "Active",
+    image: "/img/tryhackme.png",
+    url: "https://tryhackme.com/p/kasinadhsarma",
+    category: "practical"
+  },
+  {
+    title: "PicoCTF Profile", 
+    issuer: "PicoCTF",
+    date: "Active",
+    image: "/img/picoctf-logo.svg",
+    url: "https://play.picoctf.org/users/kasinadhsarma",
+    category: "practical"
+  },
+  {
     title: "Google Cloud Computing Foundations",
     issuer: "Google Cloud",
     date: "2023",
