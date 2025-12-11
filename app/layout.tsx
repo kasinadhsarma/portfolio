@@ -5,6 +5,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import MainNav from "@/components/main-nav"
+import { Analytics } from "@vercel/analytics/react"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`min-h-screen bg-background antialiased ${poppins.className}`}>
+        <Analytics />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <div className="relative min-h-screen bg-background">
             <main className="container max-w-6xl py-8 pb-32">
