@@ -173,8 +173,7 @@ export default function HomePage() {
                   I'm a cybersecurity enthusiast with a B.Tech in Cyber/Computer Forensics and Counterterrorism from Parul University. My mission is to enhance the cybersecurity and AI landscapes through innovative technologies and solutions.
                 </p>
                 <p className="mb-4 text-foreground dark:text-foreground/90">
-                I'm Kasinadh Sarma, a passionate AI and cybersecurity researcher dedicated to exploring the frontiers of intelligent systems and digital defense. With a strong foundation in full-stack development and cloud technologies, I thrive on building impactful, secure, and scalable solutions that bridge innovation with real-world applications.
-                </p>
+                  I'm Kasinadh Sarma, an AI and cybersecurity researcher with expertise in building secure, production-grade web applications. With a CSE background and hands-on experience in full-stack development (Next.js, TypeScript, React), I specialize in creating scalable solutions that prioritize security-first architecture. I've implemented enterprise-level security automation and maintained zero-vulnerability production systems in healthcare technology                </p>
               </div>
             </div>
           </AnimatedSection>
