@@ -73,10 +73,7 @@ export default function ResumePage() {
                 <Badge>Current</Badge>
               </div>
               <ul className="mt-4 list-disc pl-4 space-y-2">
-                <li>Designing and implementing SPU architecture to outperform traditional processors like CPU, GPU, TPU, NPU, LPU, and XPU</li>
-                <li>Integrated JAX for hardware acceleration, enabling seamless compatibility across multiple frameworks</li>
-                <li>Conducting research on AI consciousness and neuro-symbolic integration to develop cognitive models</li>
-                <li>Collaborated with a team to build robust neural network architectures for real-world applications</li>
+                <li>vishwamai is under research and devlopment mode</li>
               </ul>
               <a
                 href="https://github.com/VishwamAI"
