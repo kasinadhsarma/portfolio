@@ -63,7 +63,13 @@ export default function ResumePage() {
                 <li>Collaborating with cross-functional teams to deliver high-quality software solutions</li>
               </ul>
             </Card>
+          </div>
+        </section>
 
+        {/* Practical Experience Section */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Practical Experience</h2>
+          <div className="space-y-4">
             <Card className="p-4">
               <div className="flex justify-between items-start">
                 <div>
@@ -73,24 +79,18 @@ export default function ResumePage() {
                 <Badge>Current</Badge>
               </div>
               <ul className="mt-4 list-disc pl-4 space-y-2">
-                <li>vishwamai is under research and devlopment mode</li>
+                <li> Vishwamai is under research and development mode</li>
               </ul>
               <a
                 href="https://github.com/VishwamAI"
-                className="text-primary hover:underline mt-2 inline-block"
+                className="text-primary hover: underline mt-2 inline-block."
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer."
               >
                 View GitHub Repository →
               </a>
             </Card>
-          </div>
-        </section>
 
-        {/* Practical Experience Section */}
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Practical Experience</h2>
-          <div className="space-y-4">
             <Card className="p-4">
               <h3 className="text-xl font-semibold">Summer Trainee</h3>
               <p className="text-muted-foreground">Intel • May 2023 — July 2023</p>
