@@ -98,6 +98,7 @@ export default function HomePage() {
                   <div className="h-10 mb-8">
                   <TypingEffect
                       texts={[
+                        "Pentration Tester",
                         "AI Researcher",
                         "Machine Learning Researcher",
                         "Cybersecurity Researcher",
