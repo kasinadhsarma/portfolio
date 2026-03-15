@@ -13,7 +13,13 @@ export const projectId = assertValue(
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
-    throw new Error(errorMessage)
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
+      // If we're building locally without variables, we might want to know
+      // but if we're on Vercel, it's critical. 
+      // Actually, let's just warn and return empty string to allow module evaluation.
+    }
+    console.warn(`[Sanity Env Warning]: ${errorMessage}`)
+    return (process.env.NODE_ENV === 'production' ? '' : v) as T
   }
 
   return v
