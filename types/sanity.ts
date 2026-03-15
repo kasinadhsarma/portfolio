@@ -26,7 +26,7 @@ export interface SanityProject {
     alt?: string
   }>
   technologies?: string[]
-  category: 'ai' | 'web' | 'cybersecurity' | 'database' | 'cloud' | 'mobile' | 'desktop' | 'other'
+  category: Array<'ai' | 'web' | 'cybersecurity' | 'database' | 'cloud' | 'mobile' | 'desktop' | 'other'>
   status: 'development' | 'completed' | 'on-hold' | 'archived'
   github?: string
   liveUrl?: string
@@ -48,7 +48,7 @@ export interface SanityProjectCard {
   description?: string | null
   image?: string | null
   technologies?: string[] | null
-  category: string
+  category: string[]
   github?: string | null
   liveUrl?: string | null
   featured: boolean
