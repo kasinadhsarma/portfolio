@@ -3,7 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { SanityProjectCard } from '@/types/sanity'
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
