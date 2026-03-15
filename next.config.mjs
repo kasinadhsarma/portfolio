@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',  // Enable static exports
+  // NOTE: 'output: export' is intentionally removed.
+  // Sanity Studio (/studio route) requires server-side rendering and is
+  // incompatible with full static export mode.
   basePath: '',
   typescript: {
     ignoreBuildErrors: true,
@@ -12,6 +14,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'komarev.com',
         pathname: '/ghpvc/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
       },
     ],
   },
