@@ -1,11 +1,7 @@
 import React from "react"
 import { Poppins } from "next/font/google"
 import type { Metadata } from "next"
-
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import MainNav from "@/components/main-nav"
-import { Analytics } from "@vercel/analytics/react"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -15,9 +11,14 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Kasinadh Sarma",
   description:
-    "Portfolio of Kasinadh Sarma, a cybersecurity enthusiast with a B.Tech in Cyber/Computer Forensics and Counterterrorism from Parui University."
+    "Portfolio of Kasinadh Sarma, a cybersecurity enthusiast with a B.Tech in Cyber/Computer Forensics and Counterterrorism from Parui University.",
 }
 
+/**
+ * Root layout — intentionally minimal so /studio route doesn't inherit
+ * portfolio-specific UI (nav, theme provider, etc.).
+ * Portfolio-specific layout lives in app/(main)/layout.tsx.
+ */
 export default function RootLayout({
   children,
 }: {
@@ -42,16 +43,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`min-h-screen bg-background antialiased ${poppins.className}`}>
-        <Analytics />
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <div className="relative min-h-screen bg-background">
-            <main className="container max-w-6xl py-8 pb-32">
-              {children}
-            </main>
-            <MainNav />
-          </div>
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )
 }
+
