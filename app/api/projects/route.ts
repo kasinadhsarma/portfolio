@@ -4,15 +4,11 @@ import { GitHubRepo } from '@/types/github'
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
 const REPOS = [
-  'vicharcha/Web',
-  'kasinadhsarma/urbandevlopment',
-  'VishwamAI/ProtienFlex',
-  'VishwamAI/VishwamAI',
-  'VishwamAI/NeuroFlex',
-  'VishwamAI/jobcity',
   'Exploit0xfffff/Intelrepo',
-  'VishwamAI/PikasuBirdAi',
   'kasinadhsarma/Sai-Krishna-Home-Care',
+  'kasinadhsarma1/designwear',
+  'kasinadhsarma1/designwear-backend',
+  'kasinadhsarma1/designwear-sdk',
 ]
 
 export async function GET() {
