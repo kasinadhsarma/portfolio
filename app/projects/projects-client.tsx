@@ -74,6 +74,21 @@ export function ProjectsClient({
 }
 
 function ProjectCard({ project }: { project: SanityProjectCard }) {
+  // Map category values to display labels
+  const getCategoryLabel = (categoryValue: string) => {
+    const categoryMap: Record<string, string> = {
+      'ai': 'AI & ML',
+      'web': 'Web Development', 
+      'cybersecurity': 'Cybersecurity',
+      'database': 'Database',
+      'cloud': 'Cloud Computing',
+      'mobile': 'Mobile App',
+      'desktop': 'Desktop App',
+      'other': 'Other'
+    }
+    return categoryMap[categoryValue] || categoryValue
+  }
+
   return (
     <Card className="overflow-hidden flex flex-col">
       {project.image && (
@@ -109,8 +124,8 @@ function ProjectCard({ project }: { project: SanityProjectCard }) {
             </Badge>
           ))}
           {(Array.isArray(project.category) ? project.category : [project.category]).map(cat => (
-            <Badge key={cat} variant="outline" className="bg-primary/5 capitalize">
-              {cat.replace('-', ' ')}
+            <Badge key={cat} variant="outline" className="bg-primary/5">
+              {getCategoryLabel(cat)}
             </Badge>
           ))}
         </div>

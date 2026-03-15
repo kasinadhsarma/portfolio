@@ -195,7 +195,20 @@ export default defineType({
     select: {
       title: 'title',
       media: 'image',
-      subtitle: 'category',
+      category: 'category',
+      description: 'description',
+    },
+    prepare(selection) {
+      const { title, media, category, description } = selection
+      const subtitle = category && category.length > 0 
+        ? category.join(', ') 
+        : description || 'No categories'
+      
+      return {
+        title,
+        media,
+        subtitle,
+      }
     },
   },
   orderings: [
