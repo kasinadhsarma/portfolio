@@ -85,21 +85,29 @@ export default defineType({
     }),
     defineField({
       name: 'category',
-      title: 'Category',
-      type: 'string',
+      title: 'Categories',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+          options: {
+            list: [
+              { title: 'AI & ML', value: 'ai' },
+              { title: 'Web Development', value: 'web' },
+              { title: 'Cybersecurity', value: 'cybersecurity' },
+              { title: 'Database', value: 'database' },
+              { title: 'Cloud Computing', value: 'cloud' },
+              { title: 'Mobile App', value: 'mobile' },
+              { title: 'Desktop App', value: 'desktop' },
+              { title: 'Other', value: 'other' },
+            ],
+          },
+        }
+      ],
       options: {
-        list: [
-          { title: 'AI & ML', value: 'ai' },
-          { title: 'Web Development', value: 'web' },
-          { title: 'Cybersecurity', value: 'cybersecurity' },
-          { title: 'Database', value: 'database' },
-          { title: 'Cloud Computing', value: 'cloud' },
-          { title: 'Mobile App', value: 'mobile' },
-          { title: 'Desktop App', value: 'desktop' },
-          { title: 'Other', value: 'other' },
-        ],
+        layout: 'tags',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().min(1).max(3).error('Please select at least 1 and at most 3 categories'),
     }),
     defineField({
       name: 'status',
