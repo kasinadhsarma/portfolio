@@ -1,9 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import { ExternalLink, Github, Star, Code2, Brain, Shield, Database, Cloud, Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -27,25 +25,25 @@ export default function ProjectsPage() {
   ]
 
   const fetchProjects = async () => {
-      try {
-        const response = await fetch('/api/projects')
-        if (!response.ok) {
-          const error = await response.json()
-          throw new Error(error.error || 'Failed to fetch projects')
-        }
-        const data = await response.json()
-        if (!Array.isArray(data)) {
-          throw new Error('Invalid response format')
-        }
-        setProjects(data)
-        setError(null)
-      } catch (error) {
-        console.error('Failed to fetch projects:', error)
-        setError(error instanceof Error ? error.message : 'Failed to load projects')
-      } finally {
-        setLoading(false)
+    try {
+      const response = await fetch('/api/projects')
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to fetch projects')
       }
+      const data = await response.json()
+      if (!Array.isArray(data)) {
+        throw new Error('Invalid response format')
+      }
+      setProjects(data)
+      setError(null)
+    } catch (error) {
+      console.error('Failed to fetch projects:', error)
+      setError(error instanceof Error ? error.message : 'Failed to load projects')
+    } finally {
+      setLoading(false)
     }
+  }
 
   useEffect(() => {
     fetchProjects()
@@ -65,7 +63,7 @@ export default function ProjectsPage() {
     return projects.filter(project => {
       const relevantTopics = categoryMappings[category] || [category]
       const topics = project.topics || []
-      return topics.some(topic => 
+      return topics.some(topic =>
         relevantTopics.includes(topic.toLowerCase())
       ) || project.language?.toLowerCase() === category.toLowerCase()
     })
@@ -83,15 +81,15 @@ export default function ProjectsPage() {
               <p className="text-muted-foreground">
                 Explore my portfolio of personal and professional projects
               </p>
-              <a 
+              <a
                 href="https://wakatime.com/@9849b760-c9b2-46e7-b469-271f5faa6c63"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-80 transition-opacity"
               >
-                <img 
+                <img
                   src="https://wakatime.com/badge/user/9849b760-c9b2-46e7-b469-271f5faa6c63.svg"
-                  alt="Total time coded since Aug 17 2024" 
+                  alt="Total time coded since Aug 17 2024"
                   height="20"
                 />
               </a>
@@ -107,7 +105,7 @@ export default function ProjectsPage() {
             <Shield className="h-10 w-10" />
           </div>
           <p className="text-lg font-semibold text-destructive">{error}</p>
-          <button 
+          <button
             onClick={() => {
               setError(null)
               setLoading(true)
@@ -188,7 +186,7 @@ function ProjectCard({ project }: { project: GitHubRepo }) {
         <CardDescription className="line-clamp-3">
           {project.description || "A development project exploring various technologies and concepts."}
         </CardDescription>
-        
+
         <div className="flex flex-wrap gap-2">
           {(project.topics || []).map(topic => (
             <Badge key={topic} variant="secondary" className="capitalize">
