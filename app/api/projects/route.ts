@@ -1,69 +1,41 @@
 import { NextResponse } from 'next/server'
-import { GitHubRepo } from '@/types/github'
+import { client } from '@/sanity/lib/client'
+import { urlFor } from '@/sanity/lib/image'
+import { SanityProjectCard } from '@/types/sanity'
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN
-
-const REPOS = [
-  'Exploit0xfffff/Intelrepo',
-  'kasinadhsarma/Sai-Krishna-Home-Care',
-  'kasinadhsarma1/designwear',
-  'kasinadhsarma1/designwear-backend',
-  'kasinadhsarma1/designwear-sdk',
-]
+export const dynamic = 'force-static'
 
 export async function GET() {
-  if (!GITHUB_TOKEN) {
-    console.error('GitHub token not found in environment variables')
-    return NextResponse.json(
-      { error: 'GitHub token not configured' },
-      { status: 500 }
-    )
-  }
-
   try {
-    const repos = await Promise.all(
-      REPOS.map(async (repo) => {
-        try {
-          const response = await fetch(`https://api.github.com/repos/${repo}`, {
-            headers: {
-              Authorization: `token ${GITHUB_TOKEN}`,
-              Accept: 'application/vnd.github.v3+json',
-            },
-            next: { revalidate: 3600 } // Cache for 1 hour
-          })
+    const projects = await client.fetch<SanityProjectCard[]>(`
+      *[_type == "project"] | order(publishedAt desc, _createdAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        description,
+        "image": image.asset->url,
+        technologies,
+        category,
+        github,
+        liveUrl,
+        featured,
+        publishedAt
+      }
+    `)
 
-          if (!response.ok) {
-            console.error(`Failed to fetch ${repo}:`, await response.text())
-            return null
-          }
+    // Transform the data to include image URLs
+    const transformedProjects = projects.map(project => ({
+      ...project,
+      image: project.image ? urlFor(project.image).width(600).height(400).url() : null,
+    }))
 
-          const data = await response.json()
-          return {
-            id: data.id,
-            name: data.name,
-            full_name: data.full_name,
-            description: data.description || null,
-            html_url: data.html_url,
-            homepage: data.homepage || null,
-            topics: data.topics || [],
-            language: data.language || null,
-            stargazers_count: data.stargazers_count || 0,
-            forks_count: data.forks_count,
-            updated_at: data.updated_at
-          } as GitHubRepo
-        } catch (error) {
-          console.error(`Error fetching ${repo}:`, error)
-          return null
-        }
-      })
-    )
-
-    // Filter out any failed requests
-    const validRepos = repos.filter((repo): repo is GitHubRepo => repo !== null)
-
-    return NextResponse.json(validRepos)
+    return NextResponse.json(transformedProjects, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400'
+      }
+    })
   } catch (error) {
-    console.error('Failed to fetch projects:', error)
+    console.error('Failed to fetch projects from Sanity:', error)
     return NextResponse.json(
       { error: 'Failed to fetch projects' },
       { status: 500 }
