@@ -83,7 +83,7 @@ export default function HomePage() {
                   <div className="relative w-48 h-48 md:w-64 md:h-64">
                     <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-accent/30 rounded-full blur-2xl opacity-50 animate-pulse"></div>
                     <Image
-                      src="/img/me.jpg"
+                      src="/img/me_background.png"
                       alt="Kasinadh Sarma"
                       fill
                       className="rounded-full object-cover border-4 border-accent/20"

@@ -24,7 +24,7 @@ export function Sidebar() {
         <div className="flex flex-col items-center text-center mb-8">
           <div className="relative w-20 h-20 mb-4">
             <Image
-              src="/img/me.jpg"
+              src="/img/me_background.png"
               alt="Kasinadh Sarma"
               fill
               className="rounded-full object-cover"
