@@ -62,7 +62,7 @@ export function WhatImDoingSection() {
                   <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                     {activity.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 line-clamp-2">
+                  <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80">
                     {activity.description}
                   </p>
                 </div>
