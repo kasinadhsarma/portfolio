@@ -4,7 +4,6 @@ import { useState } from "react"
 import { ExternalLink, Github, Code2, Shield, Database, Cloud } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import { SanityProjectCard } from "@/types/sanity"
 
@@ -41,34 +40,34 @@ export function ProjectsClient({
   }
 
   return (
-    <ScrollArea className="w-full">
-      <Tabs defaultValue="all" onValueChange={setActiveCategory}>
-        <TabsList className="inline-flex w-full md:w-auto">
+    <Tabs defaultValue="all" onValueChange={setActiveCategory}>
+      <div className="w-full overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <TabsList className="inline-flex w-max md:w-auto">
           {categories.map(({ id, label, icon: Icon }) => (
-            <TabsTrigger key={id} value={id} className="flex items-center gap-2">
+            <TabsTrigger key={id} value={id} className="flex items-center gap-2 whitespace-nowrap">
               <Icon className="h-4 w-4" />
               {label}
             </TabsTrigger>
           ))}
         </TabsList>
+      </div>
 
-        {categories.map(({ id }) => (
-          <TabsContent key={id} value={id} className="mt-6">
-            {filterProjects(id).length === 0 ? (
-              <div className="text-center py-12 text-muted-foreground">
-                No projects found in this category
-              </div>
-            ) : (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {filterProjects(id).map(project => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </div>
-            )}
-          </TabsContent>
-        ))}
-      </Tabs>
-    </ScrollArea>
+      {categories.map(({ id }) => (
+        <TabsContent key={id} value={id} className="mt-6">
+          {filterProjects(id).length === 0 ? (
+            <div className="text-center py-12 text-muted-foreground">
+              No projects found in this category
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filterProjects(id).map(project => (
+                <ProjectCard key={project._id} project={project} />
+              ))}
+            </div>
+          )}
+        </TabsContent>
+      ))}
+    </Tabs>
   )
 }
 
@@ -99,12 +98,12 @@ function ProjectCard({ project }: { project: SanityProjectCard }) {
         </div>
       )}
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-lg">
+        <div className="flex items-start justify-between gap-2">
+          <CardTitle className="text-lg line-clamp-2">
             {project.title}
           </CardTitle>
           {project.featured && (
-            <Badge variant="default" className="text-xs">
+            <Badge variant="default" className="text-xs shrink-0">
               Featured
             </Badge>
           )}

@@ -98,10 +98,10 @@ export default function HomePage() {
                   <div className="h-10 mb-8">
                   <TypingEffect
                       texts={[
-                        "Full Stack Developer",
                         "Cybersecurity Engineer",
                         "Penetration Testing Engineer",
                         "DevSecOps Engineer",
+                        "Full Stack Engineer",
                       ]}
                     />
 
