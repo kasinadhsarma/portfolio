@@ -98,19 +98,16 @@ export default function HomePage() {
                   <div className="h-10 mb-8">
                   <TypingEffect
                       texts={[
-                        "Pentration Tester",
-                        "AI Researcher",
-                        "Machine Learning Researcher",
-                        "Cybersecurity Researcher",
-                        "Quantum Researcher",
-                        "Neural Networking and Cloud AI Researcher & Developer",
-                        "Full Stack Engineer",
+                        "Full Stack Developer",
+                        "Cybersecurity Engineer",
+                        "Penetration Testing Engineer",
+                        "DevSecOps Engineer",
                       ]}
                     />
 
                 </div>
                 <p className="text-muted-foreground mb-8 max-w-2xl">
-                    Bridging the gap between cybersecurity and innovation through cutting-edge research and development.
+                    Bridging the gap between application security and full-stack engineering to build software that's both usable and hard to break.
                   </p>
                   <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                     <Link href="mailto:kasinadhsarma@gmail.com">
@@ -171,10 +168,11 @@ export default function HomePage() {
               </h2>
               <div className="prose dark:prose-invert max-w-none">
                 <p className="mb-4 text-foreground dark:text-foreground/90">
-                  I'm a cybersecurity enthusiast with a B.Tech in Cyber/Computer Forensics and Counterterrorism from Parul University. My mission is to enhance the cybersecurity and AI landscapes through innovative technologies and solutions.
+                  I'm a Software Engineer with a B.Tech in Cyber Security from Parul University, specializing in Application Security (AppSec), DevSecOps, and full-stack web development.
                 </p>
                 <p className="mb-4 text-foreground dark:text-foreground/90">
-                  I'm Kasinadh Sarma, an AI and cybersecurity researcher with expertise in building secure, production-grade web applications. With a CSE background and hands-on experience in full-stack development (Next.js, TypeScript, React), I specialize in creating scalable solutions that prioritize security-first architecture. I've implemented enterprise-level security automation and maintained zero-vulnerability production systems in healthcare technology                </p>
+                  I'm Kasinadh Sarma. I build secure, production-grade web applications with Next.js, TypeScript, and Node.js, integrating security into the SDLC by hardening API routes, enforcing strict secrets hygiene in CI/CD pipelines, and maintaining zero-vulnerability dependencies. I also work as a penetration tester, identifying and helping remediate vulnerabilities across web applications and infrastructure.
+                </p>
               </div>
             </div>
           </AnimatedSection>

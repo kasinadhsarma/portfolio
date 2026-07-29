@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { ExternalLink, Github, Code2, Brain, Shield, Database, Cloud } from "lucide-react"
+import { ExternalLink, Github, Code2, Shield, Database, Cloud } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -23,7 +23,6 @@ export function ProjectsClient({
 
   const categories: Category[] = [
     { id: 'all', label: 'All Projects', icon: Code2 },
-    { id: 'ai', label: 'AI & ML', icon: Brain },
     { id: 'web', label: 'Web Development', icon: ExternalLink },
     { id: 'cybersecurity', label: 'Cybersecurity', icon: Shield },
     { id: 'database', label: 'Database', icon: Database },
@@ -77,8 +76,7 @@ function ProjectCard({ project }: { project: SanityProjectCard }) {
   // Map category values to display labels
   const getCategoryLabel = (categoryValue: string) => {
     const categoryMap: Record<string, string> = {
-      'ai': 'AI & ML',
-      'web': 'Web Development', 
+      'web': 'Web Development',
       'cybersecurity': 'Cybersecurity',
       'database': 'Database',
       'cloud': 'Cloud Computing',

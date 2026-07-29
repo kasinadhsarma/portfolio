@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is my personal portfolio website built with Next.js, showcasing my work, skills, and achievements in software engineering and cybersecurity.
+This is my personal portfolio website built with Next.js, showcasing my work, skills, and achievements in full-stack development, cybersecurity, and penetration testing.
 
 ## Features
 

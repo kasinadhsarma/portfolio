@@ -15,8 +15,8 @@ const activities = [
   },
   {
     icon: "/img/icons8-malware-94.png",
-    title: "AI Development",
-    description: "Building next-gen AI systems including SPU development and neural architectures."
+    title: "Penetration Testing",
+    description: "Identifying and exploiting vulnerabilities in web apps and infrastructure to strengthen security posture."
   },
   {
     icon: "/img/google-cloud-icon-2048x1646-7admxejz.png",

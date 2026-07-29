@@ -54,13 +54,32 @@ export default function ResumePage() {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-xl font-semibold">Junior Engineer</h3>
-                  <p className="text-muted-foreground">Ropods Spot • June 2025 — Present</p>
+                  <p className="text-muted-foreground">ROPODS (Medtech Startup) • June 2025 — Present</p>
                 </div>
                 <Badge>Current</Badge>
               </div>
               <ul className="mt-4 list-disc pl-4 space-y-2">
-                <li>Contributing to the company's technology stack modernization and digital transformation initiatives</li>
-                <li>Collaborating with cross-functional teams to deliver high-quality software solutions</li>
+                <li>Secured the shop.ropods.com storefront and Razorpay payment integration; engineered internal API routes with rigorous input validation and RBAC checks, securing 100% of checkout flows</li>
+                <li>Engineered a dual-layer CAPTCHA system (Google reCAPTCHA v3 + custom logic challenge) across public-facing endpoints to thwart bot attacks and form spam</li>
+                <li>Architected secure Next.js deployment pipelines on Vercel via GitHub Actions, enforcing strict environment-scoped secrets management</li>
+                <li>Drove continuous SAST and dependency auditing, maintaining zero known high-severity CVEs and resolving 100% of security-related TypeScript/ESLint errors</li>
+                <li>Conducted research on UCP (Universal Commerce Protocol) and ACP (Agentic Commerce Protocol) for product-to-platform communication standards</li>
+              </ul>
+            </Card>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Projects</h2>
+          <div className="space-y-4">
+            <Card className="p-4">
+              <h3 className="text-xl font-semibold">CIELON</h3>
+              <p className="text-muted-foreground">Freelance Client Project</p>
+              <ul className="mt-4 list-disc pl-4 space-y-2">
+                <li>Architected the secure backend infrastructure for a greenfield Next.js 16 storefront, enforcing strict TypeScript type-safety across all server-side functions</li>
+                <li>Built a secure content synchronization pipeline between Sanity Studio and Firestore with a custom read cache and strict Firebase Security Rules</li>
+                <li>Authored backend security architecture documentation and database schema designs focused on data confidentiality and Zero Trust principles</li>
               </ul>
             </Card>
           </div>
@@ -68,40 +87,19 @@ export default function ResumePage() {
 
         {/* Practical Experience Section */}
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Practical Experience</h2>
+          <h2 className="text-2xl font-semibold mb-4">Training & Internships</h2>
           <div className="space-y-4">
             <Card className="p-4">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-xl font-semibold">Research and Development Lead</h3>
-                  <p className="text-muted-foreground">VishwamAI • 2023 — Present</p>
-                </div>
-                <Badge>Current</Badge>
-              </div>
-              <ul className="mt-4 list-disc pl-4 space-y-2">
-                <li> Vishwamai is under research and development mode</li>
-              </ul>
-              <a
-                href="https://github.com/VishwamAI"
-                className="text-primary hover: underline mt-2 inline-block."
-                target="_blank"
-                rel="noopener noreferrer."
-              >
-                View GitHub Repository →
-              </a>
-            </Card>
-
-            <Card className="p-4">
               <h3 className="text-xl font-semibold">Summer Trainee</h3>
-              <p className="text-muted-foreground">Intel • May 2023 — July 2023</p>
+              <p className="text-muted-foreground">Intel Unnati • May 2023 — July 2023</p>
               <p className="mt-2">
-                Participated in the Intel Unnati summer training program. Learned about various machine learning projects and their implementation in different modes.
+                Built an AI-powered road object detection system using OpenCV, implementing memory-safe image preprocessing and strict input validation to mitigate buffer overflows and adversarial input vectors. Designed secure data ingestion architectures for large-scale TensorFlow datasets, ensuring data integrity and tamper-proofing throughout the training lifecycle.
               </p>
             </Card>
 
             <Card className="p-4">
               <h3 className="text-xl font-semibold">Cybersecurity Trainee</h3>
-              <p className="text-muted-foreground">Try Hack Me • September 2022 — February 2023</p>
+              <p className="text-muted-foreground">TryHackMe • September 2022 — February 2023</p>
               <p className="mt-2">
                 Enrolled on TryHackMe to learn and practice cybersecurity skills, participated in challenges and completed learning paths to enhance knowledge.
               </p>
@@ -114,6 +112,34 @@ export default function ResumePage() {
                 Actively engaged with the platform to enhance cybersecurity skills through practical challenges and learning paths.
               </p>
             </Card>
+          </div>
+        </section>
+
+        {/* Certifications Section */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Certifications</h2>
+          <div className="grid gap-3 md:grid-cols-2">
+            {[
+              { title: "Pre Security (SEC0) Certification", issuer: "TryHackMe", url: "https://www.credly.com/badges/4c08443d-1a8f-425c-a1bd-c466d23e8b87/public_url" },
+              { title: "Google Cloud Skills Boost", issuer: "Google Cloud" },
+              { title: "Google Professional Cyber Security", issuer: "Credly" },
+              { title: "Cybersecurity Roles, Processes & Operating System Security", issuer: "Coursera, IBM" },
+              { title: "Introduction of IoT", issuer: "NPTEL" },
+              { title: "Introduction to Programming Using Python", issuer: "HackerRank" },
+              { title: "Networking Basics", issuer: "Cisco" },
+              { title: "Networking Devices and Initial Configuration", issuer: "Cisco" },
+            ].map((cert) => (
+              <Card key={cert.title} className="p-4">
+                {cert.url ? (
+                  <a href={cert.url} target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-primary transition-colors">
+                    {cert.title}
+                  </a>
+                ) : (
+                  <h3 className="font-semibold">{cert.title}</h3>
+                )}
+                <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+              </Card>
+            ))}
           </div>
         </section>
       </div>

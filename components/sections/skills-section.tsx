@@ -3,39 +3,45 @@ import { cn } from "@/lib/utils";
 
 const skills = [
   {
-    category: "Security",
+    category: "Security & AppSec",
     items: [
       "Penetration Testing",
-      "Malware Analysis",
-      "Network Security",
-      "Incident Response"
+      "API Hardening",
+      "Input Validation",
+      "Secrets Hygiene",
+      "Dependency Auditing",
+      "RBAC"
     ]
   },
   {
     category: "Development",
     items: [
-      "Python",
-      "JavaScript",
+      "Next.js",
+      "React",
+      "Node.js",
       "TypeScript",
-      "Java"
+      "Python",
+      "REST APIs"
     ]
   },
   {
-    category: "Cloud",
+    category: "Cloud & DevSecOps",
     items: [
-      "Google Cloud",
-      "Cloud Security",
-      "Infrastructure as Code",
-      "DevOps"
+      "Google Cloud Platform",
+      "Firebase Security Rules",
+      "Vercel",
+      "GitHub Actions CI/CD Security"
     ]
   },
   {
-    category: "AI & ML",
+    category: "Languages & Tools",
     items: [
-      "Machine Learning",
-      "Neural Networks",
-      "JAX",
-      "TensorFlow"
+      "Python",
+      "TypeScript",
+      "Dart",
+      "Bash",
+      "Git",
+      "Linux"
     ]
   }
 ];

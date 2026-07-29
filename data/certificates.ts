@@ -9,6 +9,14 @@ export interface Certificate {
 
 export const certificates: Certificate[] = [
   {
+    title: "Pre Security (SEC0) Certification",
+    issuer: "TryHackMe",
+    date: "2026",
+    image: "/img/sec0-badge.png",
+    url: "https://www.credly.com/badges/4c08443d-1a8f-425c-a1bd-c466d23e8b87/public_url",
+    category: "featured"
+  },
+  {
     title: "Intel Unnati Program Certificate",
     issuer: "Intel",
     date: "2023",

@@ -12,10 +12,10 @@ export const achievements = [
     date: "2023",
   },
   {
-    title: "Machine Learning Specialist",
-    icon: "/img/machinelearning.png",
-    description: "Expertise in implementing advanced AI and ML solutions",
-    date: "2023",
+    title: "AppSec & DevSecOps",
+    icon: "/img/mitigate.png",
+    description: "Zero known high-severity CVEs maintained across production dependencies via continuous SAST and dependency auditing",
+    date: "2025",
   },
   {
     title: "Intel Unnati Program",
@@ -36,11 +36,7 @@ export const skills = [
   },
   {
     category: "Development",
-    items: ["Python", "JavaScript", "Java", "Shell Scripting"]
-  },
-  {
-    category: "AI & ML",
-    items: ["Machine Learning", "Neural Networks", "JAX", "TensorFlow"]
+    items: ["Next.js", "React", "Node.js", "TypeScript", "Python", "Dart", "Bash"]
   }
 ];
 

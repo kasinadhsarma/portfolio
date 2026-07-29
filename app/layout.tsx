@@ -15,7 +15,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Kasinadh Sarma",
   description:
-    "Portfolio of Kasinadh Sarma, a cybersecurity enthusiast with a B.Tech in Cyber/Computer Forensics and Counterterrorism from Parui University.",
+    "Portfolio of Kasinadh Sarma, a full-stack developer, cybersecurity engineer, and penetration testing engineer with a B.Tech in Cyber Security from Parul University.",
 }
 
 async function LayoutWrapper({ children }: { children: React.ReactNode }) {
