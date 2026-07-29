@@ -6,7 +6,7 @@ const activities = [
   {
     icon: "/img/icon-design.svg",
     title: "Web Development",
-    description: "Full-stack development with Python, JavaScript, and modern frameworks."
+    description: "Full-stack development with Next.js, React, Node.js, and TypeScript."
   },
   {
     icon: "/img/icon-dev.svg",
