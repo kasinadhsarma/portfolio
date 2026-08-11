@@ -6,7 +6,11 @@ export type ResumeType = {
 
 export const resumes: ResumeType[] = [
   {
-    label: "Résumé (PDF)",
+    label: "Cyber Security Résumé (PDF)",
     path: "/pdf/Resume.pdf",
+  },
+  {
+    label: "Full Stack Developer Résumé (PDF)",
+    path: "/pdf/Resume-FullStack-Developer.pdf",
   }
 ];
