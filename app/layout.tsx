@@ -7,6 +7,10 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { headers } from "next/headers"
 import { Analytics } from "@vercel/analytics/next"
+import { Suspense } from "react"
+import { GoogleAnalyticsPageView } from "@/components/google-analytics-pageview"
+
+const GA_MEASUREMENT_ID = "G-XVCV1HCLCW"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -44,19 +48,22 @@ export default function RootLayout({
         <link rel="icon" href="/img/icon.png" type="image/png" sizes="any" />
         <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVCV1HCLCW"></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-XVCV1HCLCW');
+              gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
             `,
           }}
         />
       </head>
       <body className={`min-h-screen bg-background antialiased ${poppins.className}`}>
+        <Suspense fallback={null}>
+          <GoogleAnalyticsPageView gaId={GA_MEASUREMENT_ID} />
+        </Suspense>
         <LayoutWrapper>{children}</LayoutWrapper>
         <Analytics />
       </body>
