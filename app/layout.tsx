@@ -6,6 +6,7 @@ import MainNav from "@/components/main-nav"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { headers } from "next/headers"
+import { Analytics } from "@vercel/analytics/next"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
       </head>
       <body className={`min-h-screen bg-background antialiased ${poppins.className}`}>
         <LayoutWrapper>{children}</LayoutWrapper>
+        <Analytics />
       </body>
     </html>
   )
