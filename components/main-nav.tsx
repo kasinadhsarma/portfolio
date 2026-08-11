@@ -20,21 +20,16 @@ const routes = [
 const MainNav = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
-  const [isVisible, setIsVisible] = React.useState(true)
   const [lastScrollY, setLastScrollY] = React.useState(0)
   const [theme, setTheme] = React.useState<"light" | "dark">("dark")
 
-  // Handle scroll behavior
+  // Track scroll position (nav itself stays pinned; only drives the scroll-to-top button)
   React.useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      setIsVisible(lastScrollY > currentScrollY || currentScrollY < 100)
-      setLastScrollY(currentScrollY)
-    }
+    const handleScroll = () => setLastScrollY(window.scrollY)
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   React.useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
@@ -54,25 +49,106 @@ const MainNav = () => {
   return (
     <div className={cn(
       "fixed left-0 right-0 z-50 flex justify-center p-4",
-      "bottom-0 transform transition-all duration-500 ease-in-out",
-      isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+      "bottom-0"
     )}>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger asChild>
-          <Button 
-            variant="ghost" 
-            size="icon" 
+        <div className="flex items-center gap-3">
+          {/* Mobile compact pill: menu trigger + theme toggle grouped together */}
+          <div className={cn(
+            "flex md:hidden items-center gap-1 bg-background/95 p-1.5",
+            "rounded-full shadow-lg backdrop-blur-sm border border-border/50"
+          )}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  "text-primary rounded-full",
+                  "hover:bg-primary/10 transition-all duration-200"
+                )}
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation</span>
+              </Button>
+            </SheetTrigger>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className={cn(
+                "text-primary rounded-full",
+                "transition-all duration-200",
+                "hover:text-primary/90 hover:bg-primary/10",
+                "active:scale-95"
+              )}
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+          </div>
+
+          <nav className={cn(
+            "hidden md:flex md:gap-8 bg-background/95 px-8 py-3",
+            "rounded-full shadow-lg items-center backdrop-blur-sm",
+            "border border-border/50",
+            "transition-all duration-300 ease-in-out",
+            "hover:shadow-xl hover:bg-background/98",
+            "hover:border-primary/20",
+            "hover:scale-[1.02]"
+          )}>
+            {routes.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              target={route.external ? "_blank" : undefined}
+              rel={route.external ? "noopener noreferrer" : undefined}
+              className={cn(
+                "text-sm font-medium text-muted-foreground",
+                "transition-all duration-200",
+                "hover:text-foreground hover:scale-105",
+                "active:scale-95",
+                pathname === route.href && !route.external && "text-foreground font-bold"
+              )}
+            >
+              {route.label}
+              {route.external && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-1 inline-block h-3 w-3"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              )}
+            </Link>
+          ))}
+          <ResumeDropdown variant="outline" size="sm" />
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
             className={cn(
-              "md:hidden text-primary absolute left-4",
-              "hover:bg-primary/10 transition-all duration-200"
+              "text-primary shrink-0",
+              "transition-all duration-200",
+              "hover:text-primary/90 hover:bg-primary/10",
+              "active:scale-95"
             )}
           >
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Toggle navigation</span>
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
-        </SheetTrigger>
-        <SheetContent 
-          side="bottom" 
+        </nav>
+        </div>
+
+        <SheetContent
+          side="bottom"
           className={cn(
             "w-full bg-card/95 border-none rounded-t-3xl",
             "transform transition-all duration-500 ease-in-out",
@@ -127,69 +203,6 @@ const MainNav = () => {
         </SheetContent>
       </Sheet>
 
-      <div className="flex items-center gap-4">
-        <nav className={cn(
-          "hidden md:flex md:gap-8 bg-background/95 px-8 py-3",
-          "rounded-full shadow-lg items-center backdrop-blur-sm",
-          "border border-border/50",
-          "transform transition-all duration-500 ease-in-out",
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
-          "hover:shadow-xl hover:bg-background/98",
-          "hover:border-primary/20",
-          "hover:scale-[1.02]"
-        )}>
-          {routes.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
-              target={route.external ? "_blank" : undefined}
-              rel={route.external ? "noopener noreferrer" : undefined}
-              className={cn(
-                "text-sm font-medium text-muted-foreground",
-                "transition-all duration-200",
-                "hover:text-foreground hover:scale-105",
-                "active:scale-95",
-                pathname === route.href && !route.external && "text-foreground font-bold"
-              )}
-            >
-              {route.label}
-              {route.external && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="ml-1 inline-block h-3 w-3"
-                >
-                  <path d="M7 7h10v10" />
-                  <path d="M7 17 17 7" />
-                </svg>
-              )}
-            </Link>
-          ))}
-          <ResumeDropdown variant="outline" size="sm" />
-        </nav>
-
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={toggleTheme}
-          className={cn(
-            "text-primary",
-            "transition-all duration-200",
-            "hover:text-primary/90 hover:bg-primary/10",
-            "active:scale-95"
-          )}
-        >
-          {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </Button>
-      </div>
-      
       {/* Scroll to top button */}
       <Button
         variant="ghost"
