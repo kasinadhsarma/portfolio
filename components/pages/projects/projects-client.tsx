@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { SanityProjectCard } from "@/types/sanity"
+import { projectsClientPatterns as p, projectCardPatterns as pc } from "@/lib/responsive/pattrens/projects"
 
 interface Category {
   id: string
@@ -13,9 +14,9 @@ interface Category {
   icon: typeof Code2
 }
 
-export function ProjectsClient({ 
+export function ProjectsClient({
   projects
-}: { 
+}: {
   projects: SanityProjectCard[]
 }) {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -32,8 +33,8 @@ export function ProjectsClient({
 
   const filterProjects = (category: string) => {
     if (category === 'all') return projects
-    return projects.filter(project => 
-      Array.isArray(project.category) 
+    return projects.filter(project =>
+      Array.isArray(project.category)
         ? project.category.includes(category)
         : project.category === category // backward compatibility
     )
@@ -41,10 +42,10 @@ export function ProjectsClient({
 
   return (
     <Tabs defaultValue="all" onValueChange={setActiveCategory}>
-      <div className="w-full overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <TabsList className="inline-flex w-max md:w-auto">
+      <div className={p.tabsScrollWrapper}>
+        <TabsList className={p.tabsList}>
           {categories.map(({ id, label, icon: Icon }) => (
-            <TabsTrigger key={id} value={id} className="flex items-center gap-2 whitespace-nowrap">
+            <TabsTrigger key={id} value={id} className={p.tabsTrigger}>
               <Icon className="h-4 w-4" />
               {label}
             </TabsTrigger>
@@ -53,13 +54,13 @@ export function ProjectsClient({
       </div>
 
       {categories.map(({ id }) => (
-        <TabsContent key={id} value={id} className="mt-6">
+        <TabsContent key={id} value={id} className={p.tabsContent}>
           {filterProjects(id).length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">
+            <div className={p.emptyState}>
               No projects found in this category
             </div>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className={p.grid}>
               {filterProjects(id).map(project => (
                 <ProjectCard key={project._id} project={project} />
               ))}
@@ -87,54 +88,54 @@ function ProjectCard({ project }: { project: SanityProjectCard }) {
   }
 
   return (
-    <Card className="overflow-hidden flex flex-col">
+    <Card className={pc.card}>
       {project.image && (
-        <div className="aspect-video overflow-hidden">
+        <div className={pc.imageWrapper}>
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover transition-transform hover:scale-105"
+            className={pc.image}
           />
         </div>
       )}
       <CardHeader>
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-lg line-clamp-2">
+        <div className={pc.headerRow}>
+          <CardTitle className={pc.title}>
             {project.title}
           </CardTitle>
           {project.featured && (
-            <Badge variant="default" className="text-xs shrink-0">
+            <Badge variant="default" className={pc.featuredBadge}>
               Featured
             </Badge>
           )}
         </div>
       </CardHeader>
-      <CardContent className="flex-grow space-y-4">
-        <CardDescription className="line-clamp-3">
+      <CardContent className={pc.content}>
+        <CardDescription className={pc.description}>
           {project.description || "A development project exploring various technologies and concepts."}
         </CardDescription>
 
-        <div className="flex flex-wrap gap-2">
+        <div className={pc.techRow}>
           {(project.technologies || []).map(tech => (
-            <Badge key={tech} variant="secondary" className="capitalize">
+            <Badge key={tech} variant="secondary" className={pc.techBadge}>
               {tech}
             </Badge>
           ))}
           {(Array.isArray(project.category) ? project.category : [project.category]).map(cat => (
-            <Badge key={cat} variant="outline" className="bg-primary/5">
+            <Badge key={cat} variant="outline" className={pc.categoryBadge}>
               {getCategoryLabel(cat)}
             </Badge>
           ))}
         </div>
       </CardContent>
-      <CardFooter className="border-t bg-muted/50 pt-4">
-        <div className="flex w-full justify-between">
+      <CardFooter className={pc.footer}>
+        <div className={pc.footerRow}>
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className={pc.footerLink}
             >
               <Github className="h-4 w-4" />
               Source Code
@@ -145,7 +146,7 @@ function ProjectCard({ project }: { project: SanityProjectCard }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className={pc.footerLink}
             >
               <ExternalLink className="h-4 w-4" />
               Live Demo

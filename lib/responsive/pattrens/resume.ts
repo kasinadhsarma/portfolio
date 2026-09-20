@@ -1,0 +1,15 @@
+export const resumePagePatterns = {
+  container: "container mx-auto py-8",
+  title: "text-4xl font-bold mb-8",
+  dropdownWrapper: "mb-8",
+  sectionsGrid: "grid gap-8",
+  sectionHeading: "text-2xl font-semibold mb-4",
+  itemsWrapper: "space-y-4",
+  card: "p-4",
+  itemTitle: "text-xl font-semibold",
+  itemMeta: "text-muted-foreground",
+  expHeaderRow: "flex justify-between items-start",
+  descriptionPreLine: "mt-2 whitespace-pre-line",
+  descriptionPlain: "mt-2",
+  highlightsList: "mt-4 list-disc pl-4 space-y-2",
+}

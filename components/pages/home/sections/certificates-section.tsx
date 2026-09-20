@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { SanityCertificateCard } from "@/types/sanity";
 import { CertificatesCarousel } from "@/components/ui/certificates-carousel";
+import { certificatesPatterns as p } from "@/lib/responsive/pattrens/home";
 
 export function CertificatesSection() {
   const [certificates, setCertificates] = useState<SanityCertificateCard[]>([]);
@@ -19,11 +20,11 @@ export function CertificatesSection() {
   const practicalCerts = certificates.filter(cert => cert.category === "practical");
 
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-accent/5">
-      <div className="container max-w-6xl 2xl:max-w-[1600px] space-y-16">
+    <section className={p.section}>
+      <div className={p.container}>
         {/* Featured Certifications */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+          <h2 className={p.heading}>
             Featured Certifications
           </h2>
           <CertificatesCarousel certificates={featuredCerts} priorityFirst />
@@ -31,7 +32,7 @@ export function CertificatesSection() {
 
         {/* Google Cloud Badges */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+          <h2 className={p.heading}>
             Google Cloud Badges
           </h2>
           <CertificatesCarousel certificates={cloudCerts} />
@@ -40,7 +41,7 @@ export function CertificatesSection() {
         {/* Practical Experience */}
         {practicalCerts.length > 0 && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+            <h2 className={p.heading}>
               Practical Experience
             </h2>
             <CertificatesCarousel certificates={practicalCerts} />

@@ -1,46 +1,3 @@
-import { PortableTextBlock } from 'sanity'
-
-export interface SanityProject {
-  _id: string
-  _type: 'project'
-  _createdAt: string
-  _updatedAt: string
-  title: string
-  slug: {
-    current: string
-  }
-  description?: string
-  longDescription?: PortableTextBlock[]
-  image?: {
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-    alt?: string
-  }
-  gallery?: Array<{
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-    alt?: string
-  }>
-  technologies?: string[]
-  category: Array<'ai' | 'web' | 'cybersecurity' | 'database' | 'cloud' | 'mobile' | 'desktop' | 'other'>
-  status: 'development' | 'completed' | 'on-hold' | 'archived'
-  github?: string
-  liveUrl?: string
-  featured: boolean
-  startDate?: string
-  endDate?: string
-  team?: Array<{
-    name: string
-    role: string
-    url?: string
-  }>
-  publishedAt: string
-}
-
 export interface SanityProjectCard {
   _id: string
   title: string
@@ -81,20 +38,6 @@ export interface SanityCertificateCard {
   image?: string | null
   url?: string | null
   category: 'featured' | 'cloud' | 'work' | 'practical'
-}
-
-export interface SanityAchievement {
-  _id: string
-  title: string
-  icon?: string | null
-  description?: string | null
-  date?: string | null
-}
-
-export interface SanitySkillCategory {
-  _id: string
-  category: string
-  items: string[]
 }
 
 export interface SanityResumeFileCard {
