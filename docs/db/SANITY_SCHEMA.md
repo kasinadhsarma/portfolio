@@ -6,26 +6,85 @@ Query client: [sanity/lib/client.ts](../../sanity/lib/client.ts) · Write client
 
 ## Entity-Relationship Overview
 
+```mermaid
+erDiagram
+    PROJECT {
+        string title
+        slug slug
+        text description
+        array category
+        string status
+        url github
+        url liveUrl
+        datetime publishedAt
+    }
+    PROJECT ||--o{ TEAM_MEMBER : "team[]"
+    TEAM_MEMBER {
+        string name
+        string role
+        url url
+    }
+
+    CERTIFICATE {
+        string title
+        string issuer
+        string date
+        string category
+        number order
+    }
+
+    ACHIEVEMENT {
+        string title
+        text description
+        string date
+        number order
+    }
+
+    SKILL_CATEGORY {
+        string category
+        array items
+        number order
+    }
+
+    RESUME_FILE {
+        string label
+        file file
+        number order
+    }
+
+    RESUME {
+        string id "singleton, fixed id = resume"
+    }
+    RESUME ||--o{ EDUCATION_ENTRY : "education[]"
+    RESUME ||--o{ EXPERIENCE_ENTRY : "experience[]"
+    RESUME ||--o{ RESUME_PROJECT_ENTRY : "projects[]"
+    RESUME ||--o{ TRAINING_ENTRY : "training[]"
+    EDUCATION_ENTRY {
+        string institution
+        string period
+        text description
+    }
+    EXPERIENCE_ENTRY {
+        string title
+        string organization
+        string period
+        boolean current
+        array highlights
+    }
+    RESUME_PROJECT_ENTRY {
+        string title
+        string subtitle
+        array highlights
+    }
+    TRAINING_ENTRY {
+        string title
+        string organization
+        string period
+        text description
+    }
 ```
-project (document)
-  └─ team[] (embedded object, no reference)
 
-certificate (document)          — standalone
-
-achievement (document)          — standalone
-
-skillCategory (document)        — standalone
-
-resumeFile (document)           — standalone (one row per downloadable PDF)
-
-resume (document, SINGLETON, id="resume")
-  ├─ education[]   (embedded object: educationEntry)
-  ├─ experience[]  (embedded object: experienceEntry)
-  ├─ projects[]    (embedded object: resumeProjectEntry)
-  └─ training[]    (embedded object: trainingEntry)
-```
-
-There are no `reference` fields between document types in this schema — all one-to-many relationships (e.g. resume → experience entries) are modeled as **embedded arrays of objects**, not joins.
+`CERTIFICATE`, `ACHIEVEMENT`, and `SKILL_CATEGORY` have no relations to other document types — they're standalone collections. `TEAM_MEMBER` and the `*_ENTRY` types are embedded objects (arrays-of-objects), not Sanity `reference` fields, so they only ever exist nested inside their parent document. There are no `reference` fields between document types in this schema at all — every one-to-many relationship is modeled as an **embedded array of objects**, not a join.
 
 ---
 
