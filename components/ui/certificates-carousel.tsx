@@ -4,11 +4,11 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn, storeAndEncodeUrl, safeOpenUrl } from '@/lib/utils'
-import { Certificate } from '@/data/certificates'
+import { SanityCertificateCard } from '@/types/sanity'
 import { Button } from './button'
 
 interface CertificatesCarouselProps {
-  certificates: Certificate[]
+  certificates: SanityCertificateCard[]
   className?: string
 }
 
@@ -29,19 +29,24 @@ export function CertificatesCarousel({ certificates, className }: CertificatesCa
         ref={scrollContainerRef}
         className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth"
       >
-        {certificates.map((cert, index) => (
+        {certificates.map((cert) => (
           <div
-            key={index}
-            onClick={() => safeOpenUrl(storeAndEncodeUrl(cert.url))}
-            className="flex-none w-48 h-48 relative transition-transform hover:scale-105 cursor-pointer"
+            key={cert._id}
+            onClick={() => cert.url && safeOpenUrl(storeAndEncodeUrl(cert.url))}
+            className={cn(
+              "flex-none w-48 h-48 relative transition-transform hover:scale-105",
+              cert.url ? "cursor-pointer" : "cursor-default"
+            )}
           >
-            <Image
-              src={cert.image}
-              alt={cert.title}
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+            {cert.image && (
+              <Image
+                src={cert.image}
+                alt={cert.title}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            )}
           </div>
         ))}
       </div>

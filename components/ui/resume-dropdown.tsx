@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { ChevronDown, FileDown } from "lucide-react";
-import { resumes } from "@/lib/resume-data";
+import { SanityResumeFileCard } from "@/types/sanity";
 import Link from "next/link";
 
 interface ResumeDropdownProps {
@@ -21,6 +24,15 @@ export function ResumeDropdown({
   size = "default",
   className
 }: ResumeDropdownProps) {
+  const [resumes, setResumes] = useState<SanityResumeFileCard[]>([]);
+
+  useEffect(() => {
+    fetch("/api/resume-files")
+      .then((res) => res.json())
+      .then((data) => setResumes(Array.isArray(data) ? data : []))
+      .catch((error) => console.error("Failed to load resume files:", error));
+  }, []);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -32,10 +44,10 @@ export function ResumeDropdown({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         {resumes.map((resume) => (
-          <DropdownMenuItem key={resume.path} asChild>
+          <DropdownMenuItem key={resume.url} asChild>
             <Link
-              href={resume.path}
-              download={resume.path.split('/').pop()}
+              href={resume.url}
+              download
               className="flex items-center gap-2 cursor-pointer w-full"
             >
               <FileDown className="h-4 w-4" />

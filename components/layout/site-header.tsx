@@ -1,6 +1,6 @@
 import type React from "react"
-import MainNav from "@/components/main-nav"
-import ThemeToggle from "@/components/theme-toggle"
+import MainNav from "@/components/layout/main-nav"
+import ThemeToggle from "@/components/ui/theme-toggle"
 
 const SiteHeader: React.FC = () => {
   return (

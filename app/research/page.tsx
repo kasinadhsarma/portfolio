@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { PublicationCard } from "@/components/publication-card"
-import { ResearchCard } from "@/components/research-card"
+import { PublicationCard } from "@/components/cards/publication-card"
+import { ResearchCard } from "@/components/cards/research-card"
 
 export default function ResearchPage() {
   const publications = [
