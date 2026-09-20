@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { typingEffectPatterns as p } from "@/lib/responsive/pattrens/ui";
 
 export function TypingEffect({ texts }: { texts: string[] }) {
   const [currentTextIndex, setCurrentTextIndex] = React.useState(0);
@@ -28,9 +29,9 @@ export function TypingEffect({ texts }: { texts: string[] }) {
   }, [currentText, currentTextIndex, isDeleting, texts]);
 
   return (
-    <span className="text-xl font-medium bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent dark:from-primary/90 dark:via-primary/70 dark:to-primary/50">
+    <span className={p.text}>
       {currentText}
-      <span className="animate-blink text-primary">|</span>
+      <span className={p.cursor}>|</span>
     </span>
   );
 }

@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ChevronDown, FileDown } from "lucide-react";
 import { SanityResumeFileCard } from "@/types/sanity";
+import { resumeDropdownPatterns as p } from "@/lib/responsive/pattrens/ui";
 import Link from "next/link";
 
 interface ResumeDropdownProps {
@@ -36,19 +37,19 @@ export function ResumeDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={variant} size={size} className={cn("gap-2", className)}>
+        <Button variant={variant} size={size} className={cn(p.triggerButton, className)}>
           <FileDown className="h-4 w-4" />
           Download Resume
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className={p.content}>
         {resumes.map((resume) => (
           <DropdownMenuItem key={resume.url} asChild>
             <Link
               href={resume.url}
               download
-              className="flex items-center gap-2 cursor-pointer w-full"
+              className={p.link}
             >
               <FileDown className="h-4 w-4" />
               <span>{resume.label}</span>

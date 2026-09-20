@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { scrollSectionPatterns as p } from "@/lib/responsive/pattrens/ui";
 
 interface ScrollSectionProps {
   children: React.ReactNode;
@@ -8,27 +9,27 @@ interface ScrollSectionProps {
   className?: string;
 }
 
-export function ScrollSection({ 
-  children, 
-  direction = "up", 
+export function ScrollSection({
+  children,
+  direction = "up",
   delay = 0,
-  className 
+  className
 }: ScrollSectionProps) {
   const { ref, isVisible } = useScrollAnimation();
 
   const directionStyles = {
-    up: "translate-y-8",
-    down: "-translate-y-8",
-    left: "translate-x-8",
-    right: "-translate-x-8"
+    up: p.directionUp,
+    down: p.directionDown,
+    left: p.directionLeft,
+    right: p.directionRight,
   };
 
   return (
     <div
       ref={ref}
       className={cn(
-        "transform transition-all duration-700 ease-out",
-        isVisible ? "translate-y-0 translate-x-0 opacity-100" : `${directionStyles[direction]} opacity-0`,
+        p.base,
+        isVisible ? p.visible : `${directionStyles[direction]} ${p.hidden}`,
         className
       )}
       style={{

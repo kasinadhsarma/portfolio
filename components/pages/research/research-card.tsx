@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { researchCardPatterns as p } from "@/lib/responsive/pattrens/research"
 
 interface ResearchCardProps {
   title: string
@@ -22,16 +23,16 @@ export function ResearchCard({
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="h-full bg-card/50 backdrop-blur-sm border-2 hover:border-primary/50">
+      <Card className={p.card}>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xl font-bold">{title}</CardTitle>
+          <div className={p.headerRow}>
+            <CardTitle className={p.title}>{title}</CardTitle>
             <div
               className={cn(
-                "px-3 py-1 text-sm font-medium rounded-full",
-                status === "Ongoing" && "bg-yellow-500/10 text-yellow-500",
-                status === "Active" && "bg-green-500/10 text-green-500",
-                status === "Completed" && "bg-blue-500/10 text-blue-500",
+                p.statusBadge,
+                status === "Ongoing" && p.statusOngoing,
+                status === "Active" && p.statusActive,
+                status === "Completed" && p.statusCompleted,
               )}
             >
               {status}
@@ -39,10 +40,10 @@ export function ResearchCard({
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground mb-4 text-base">{description}</p>
-          <div className="flex flex-wrap gap-2">
+          <p className={p.description}>{description}</p>
+          <div className={p.techRow}>
             {technologies.map((tech) => (
-              <div key={tech} className="px-3 py-1 text-sm rounded-full bg-primary/10 text-primary font-medium">
+              <div key={tech} className={p.techBadge}>
                 {tech}
               </div>
             ))}
@@ -52,4 +53,3 @@ export function ResearchCard({
     </motion.div>
   )
 }
-

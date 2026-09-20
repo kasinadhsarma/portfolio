@@ -1,5 +1,5 @@
-import { PublicationCard } from "@/components/cards/publication-card"
-import { ResearchCard } from "@/components/cards/research-card"
+import { PublicationCard } from "./publication-card"
+import { ResearchCard } from "./research-card"
 import { researchContentPatterns as p } from "@/lib/responsive/pattrens/research"
 
 const publications = [

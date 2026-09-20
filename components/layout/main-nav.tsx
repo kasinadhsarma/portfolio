@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { ResumeDropdown } from "@/components/ui/resume-dropdown"
+import { mainNavPatterns as p } from "@/lib/responsive/pattrens/layout"
 
 const routes = [
   { href: "/", label: "About" },
@@ -47,25 +48,16 @@ const MainNav = () => {
   }
 
   return (
-    <div className={cn(
-      "fixed left-0 right-0 z-50 flex justify-center p-4 pointer-events-none",
-      "bottom-0"
-    )}>
+    <div className={p.root}>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <div className="flex items-center gap-3 pointer-events-auto">
+        <div className={p.innerRow}>
           {/* Mobile compact pill: menu trigger + theme toggle grouped together */}
-          <div className={cn(
-            "flex md:hidden items-center gap-1 bg-background/95 p-1.5",
-            "rounded-full shadow-lg backdrop-blur-sm border border-border/50"
-          )}>
+          <div className={p.mobilePill}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className={cn(
-                  "text-primary rounded-full",
-                  "hover:bg-primary/10 transition-all duration-200"
-                )}
+                className={p.mobileMenuButton}
               >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation</span>
@@ -75,26 +67,13 @@ const MainNav = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className={cn(
-                "text-primary rounded-full",
-                "transition-all duration-200",
-                "hover:text-primary/90 hover:bg-primary/10",
-                "active:scale-95"
-              )}
+              className={p.mobileThemeButton}
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
           </div>
 
-          <nav className={cn(
-            "hidden md:flex md:gap-8 bg-background/95 px-8 py-3",
-            "rounded-full shadow-lg items-center backdrop-blur-sm",
-            "border border-border/50",
-            "transition-all duration-300 ease-in-out",
-            "hover:shadow-xl hover:bg-background/98",
-            "hover:border-primary/20",
-            "hover:scale-[1.02]"
-          )}>
+          <nav className={p.desktopNav}>
             {routes.map((route) => (
             <Link
               key={route.href}
@@ -102,11 +81,8 @@ const MainNav = () => {
               target={route.external ? "_blank" : undefined}
               rel={route.external ? "noopener noreferrer" : undefined}
               className={cn(
-                "text-sm font-medium text-muted-foreground",
-                "transition-all duration-200",
-                "hover:text-foreground hover:scale-105",
-                "active:scale-95",
-                pathname === route.href && !route.external && "text-foreground font-bold"
+                p.desktopLink,
+                pathname === route.href && !route.external && p.desktopLinkActive
               )}
             >
               {route.label}
@@ -121,7 +97,7 @@ const MainNav = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="ml-1 inline-block h-3 w-3"
+                  className={p.externalIcon}
                 >
                   <path d="M7 7h10v10" />
                   <path d="M7 17 17 7" />
@@ -135,12 +111,7 @@ const MainNav = () => {
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
-            className={cn(
-              "text-primary shrink-0",
-              "transition-all duration-200",
-              "hover:text-primary/90 hover:bg-primary/10",
-              "active:scale-95"
-            )}
+            className={p.desktopThemeButton}
           >
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
@@ -150,17 +121,11 @@ const MainNav = () => {
         <SheetContent
           side="bottom"
           className={cn(
-            "w-full bg-card/95 border-none rounded-t-3xl",
-            "transform transition-all duration-500 ease-in-out",
-            isOpen ? "animate-slide-up" : "animate-slide-down"
+            p.sheetContent,
+            isOpen ? p.sheetContentSlideUp : p.sheetContentSlideDown
           )}
         >
-          <nav className={cn(
-            "flex flex-col gap-2",
-            "transform transition-all duration-300",
-            "data-[state=open]:translate-y-0 data-[state=open]:opacity-100",
-            "data-[state=closed]:translate-y-4 data-[state=closed]:opacity-0"
-          )}>
+          <nav className={p.mobileNav}>
             {routes.map((route) => (
               <Link
                 key={route.href}
@@ -169,11 +134,8 @@ const MainNav = () => {
                 rel={route.external ? "noopener noreferrer" : undefined}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "text-lg font-medium px-4 py-3 text-primary",
-                  "transition-all duration-200 rounded-lg",
-                  "hover:text-primary hover:bg-primary/10",
-                  "active:scale-95",
-                  pathname === route.href && !route.external && "text-primary/90 bg-primary/20"
+                  p.mobileLink,
+                  pathname === route.href && !route.external && p.mobileLinkActive
                 )}
               >
                 {route.label}
@@ -188,7 +150,7 @@ const MainNav = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="ml-2 inline-block h-4 w-4"
+                    className={p.mobileExternalIcon}
                   >
                     <path d="M7 7h10v10" />
                     <path d="M7 17 17 7" />
@@ -196,7 +158,7 @@ const MainNav = () => {
                 )}
               </Link>
             ))}
-            <div className="px-4 py-2">
+            <div className={p.mobileResumeWrapper}>
               <ResumeDropdown className="w-full" />
             </div>
           </nav>
@@ -209,11 +171,8 @@ const MainNav = () => {
         size="icon"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className={cn(
-          "fixed bottom-20 right-4 text-primary pointer-events-auto",
-          "transition-all duration-200",
-          "hover:text-primary/90 hover:bg-primary/10",
-          "md:bottom-24",
-          lastScrollY < 100 && "opacity-0 pointer-events-none"
+          p.scrollTopButton,
+          lastScrollY < 100 && p.scrollTopButtonHidden
         )}
       >
         <ChevronUp className="h-5 w-5" />

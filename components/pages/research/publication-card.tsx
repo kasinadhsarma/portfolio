@@ -2,6 +2,7 @@
 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { storeAndEncodeUrl, safeOpenUrl } from "@/lib/utils"
+import { publicationCardPatterns as p } from "@/lib/responsive/pattrens/research"
 import { useEffect, useState } from "react"
 
 interface PublicationCardProps {
@@ -27,10 +28,10 @@ export function PublicationCard({ title, url, isLocal = false }: PublicationCard
   }
 
   return (
-    <Card className="hover:bg-accent/50 transition-colors cursor-pointer" onClick={handleClick}>
+    <Card className={p.card} onClick={handleClick}>
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-lg hover:text-primary transition-colors">
+        <div className={p.headerRow}>
+          <CardTitle className={p.title}>
             {title}
           </CardTitle>
         </div>

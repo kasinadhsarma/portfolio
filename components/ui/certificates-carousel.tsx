@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn, storeAndEncodeUrl, safeOpenUrl } from '@/lib/utils'
 import { SanityCertificateCard } from '@/types/sanity'
+import { certificatesCarouselPatterns as p } from '@/lib/responsive/pattrens/ui'
 import { Button } from './button'
 
 interface CertificatesCarouselProps {
@@ -25,18 +26,18 @@ export function CertificatesCarousel({ certificates, className, priorityFirst }:
   }
 
   return (
-    <div className={cn("relative w-full group", className)}>
+    <div className={cn(p.root, className)}>
       <div
         ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth"
+        className={p.scrollRow}
       >
         {certificates.map((cert, index) => (
           <div
             key={cert._id}
             onClick={() => cert.url && safeOpenUrl(storeAndEncodeUrl(cert.url))}
             className={cn(
-              "flex-none w-48 h-48 relative rounded-xl border border-border/40 bg-card p-4 shadow-sm transition-transform hover:scale-105 hover:shadow-md",
-              cert.url ? "cursor-pointer" : "cursor-default"
+              p.item,
+              cert.url ? p.itemClickable : p.itemStatic
             )}
           >
             {cert.image && (
@@ -44,7 +45,7 @@ export function CertificatesCarousel({ certificates, className, priorityFirst }:
                 src={cert.image}
                 alt={cert.title}
                 fill
-                className="object-contain p-2"
+                className={p.image}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority={priorityFirst && index === 0}
               />
@@ -52,20 +53,20 @@ export function CertificatesCarousel({ certificates, className, priorityFirst }:
           </div>
         ))}
       </div>
-      
+
       <Button
         variant="outline"
         size="icon"
-        className="absolute left-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity"
+        className={p.navLeft}
         onClick={() => scroll('left')}
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
-      
+
       <Button
         variant="outline"
         size="icon"
-        className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity"
+        className={p.navRight}
         onClick={() => scroll('right')}
       >
         <ChevronRight className="h-4 w-4" />
