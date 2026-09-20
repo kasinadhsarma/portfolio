@@ -15,7 +15,14 @@ export function encryptUrl(url: string): string {
     // Create hash of URL for shorter encoded strings
     const hash = crypto.createHash('sha256')
     hash.update(url + SECRET_KEY)
-    return hash.digest('base64url')
+    // 'base64url' digest encoding isn't supported by the browser's crypto
+    // polyfill (only real Node crypto has it), so derive it manually from
+    // the universally-supported 'base64' encoding instead.
+    return hash
+      .digest('base64')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '')
   } catch (error) {
     console.error('Error encrypting URL:', error)
     return encodeURIComponent(url) // Fallback to simple encoding

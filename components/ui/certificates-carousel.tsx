@@ -10,9 +10,10 @@ import { Button } from './button'
 interface CertificatesCarouselProps {
   certificates: SanityCertificateCard[]
   className?: string
+  priorityFirst?: boolean
 }
 
-export function CertificatesCarousel({ certificates, className }: CertificatesCarouselProps) {
+export function CertificatesCarousel({ certificates, className, priorityFirst }: CertificatesCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const scroll = (direction: 'left' | 'right') => {
@@ -29,12 +30,12 @@ export function CertificatesCarousel({ certificates, className }: CertificatesCa
         ref={scrollContainerRef}
         className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth"
       >
-        {certificates.map((cert) => (
+        {certificates.map((cert, index) => (
           <div
             key={cert._id}
             onClick={() => cert.url && safeOpenUrl(storeAndEncodeUrl(cert.url))}
             className={cn(
-              "flex-none w-48 h-48 relative transition-transform hover:scale-105",
+              "flex-none w-48 h-48 relative rounded-xl border border-border/40 bg-card p-4 shadow-sm transition-transform hover:scale-105 hover:shadow-md",
               cert.url ? "cursor-pointer" : "cursor-default"
             )}
           >
@@ -43,8 +44,9 @@ export function CertificatesCarousel({ certificates, className }: CertificatesCa
                 src={cert.image}
                 alt={cert.title}
                 fill
-                className="object-contain"
+                className="object-contain p-2"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={priorityFirst && index === 0}
               />
             )}
           </div>

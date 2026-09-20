@@ -29,7 +29,7 @@ export async function GET() {
       title: cert.title,
       issuer: cert.issuer,
       date: cert.date ?? null,
-      image: cert.image ? urlFor(cert.image).width(400).height(400).url() : null,
+      image: cert.image ? urlFor(cert.image).width(400).url() : null,
       url: cert.url ?? null,
       category: cert.category,
     }))

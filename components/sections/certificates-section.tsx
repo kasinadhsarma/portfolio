@@ -26,7 +26,7 @@ export function CertificatesSection() {
           <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
             Featured Certifications
           </h2>
-          <CertificatesCarousel certificates={featuredCerts} />
+          <CertificatesCarousel certificates={featuredCerts} priorityFirst />
         </div>
 
         {/* Google Cloud Badges */}
