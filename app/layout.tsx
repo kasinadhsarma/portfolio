@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google"
 import type { Metadata } from "next"
 import "./globals.css"
 import MainNav from "@/components/layout/main-nav"
+import TopBar from "@/components/layout/top-bar"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { headers } from "next/headers"
@@ -30,6 +31,7 @@ async function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {!isStudio && <TopBar />}
       {!isStudio && <MainNav />}
       <div className={!isStudio ? "pb-24 md:pb-28" : undefined}>{children}</div>
       {!isStudio && <Toaster />}
@@ -47,6 +49,12 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/img/icon.png" type="image/png" sizes="any" />
         <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+        {/* Apply saved text size before paint (see components/layout/top-bar.tsx) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var i=Number(localStorage.getItem("font-scale"));var s=[87.5,100,112.5,125];if(Number.isInteger(i)&&s[i])document.documentElement.style.fontSize=s[i]+"%"}catch(e){}`,
+          }}
+        />
         {/* Google Analytics */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
         <script

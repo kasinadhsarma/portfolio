@@ -22,3 +22,17 @@ export const mainNavPatterns = {
   scrollTopButton: "fixed bottom-20 right-4 text-primary pointer-events-auto transition-all duration-200 hover:text-primary/90 hover:bg-primary/10 md:bottom-24",
   scrollTopButtonHidden: "opacity-0 pointer-events-none",
 }
+
+export const topBarPatterns = {
+  root: "relative z-40 w-full bg-amber-500 text-black dark:bg-amber-600",
+  inner: "container flex max-w-6xl items-center gap-3 px-4 py-1.5 text-xs sm:text-sm 2xl:max-w-[1600px]",
+  message: "flex min-w-0 flex-1 items-center gap-2 font-semibold",
+  messageIcon: "h-4 w-4 shrink-0",
+  messageText: "truncate",
+  controls: "flex shrink-0 items-center gap-3",
+  clock: "hidden font-medium tabular-nums sm:inline",
+  fontGroup: "flex items-center gap-1",
+  fontButton:
+    "rounded px-1.5 font-semibold leading-6 transition-colors hover:bg-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/60 disabled:cursor-not-allowed disabled:opacity-40",
+  fontButtonActive: "bg-black/15",
+}

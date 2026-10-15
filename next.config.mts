@@ -26,6 +26,10 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  async rewrites() {
+    // SethuCMS admin is a static Vite build served from public/sethu/.
+    return [{ source: '/sethu', destination: '/sethu/index.html' }]
+  },
   async headers() {
     // 'unsafe-eval' is only needed for Next.js dev-mode tooling (Fast
     // Refresh / stack-trace reconstruction) — React never calls eval() in
@@ -37,7 +41,7 @@ const nextConfig = {
       "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
       "img-src 'self' data: https://cdn.sanity.io https://komarev.com https://wakatime.com https://www.google.com https://www.google.co.in",
       "font-src 'self' data: https://cdn.jsdelivr.net",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://stats.g.doubleclick.net https://cdn.sanity.io",
+      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://stats.g.doubleclick.net https://cdn.sanity.io https://out-omega-navy.vercel.app",
       "frame-ancestors 'self'",
     ].join('; ')
 
