@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { SanityCertificateCard } from "@/types/sanity";
+import { CertificateCard } from "@/types/content";
 import { CertificatesCarousel } from "@/components/ui/certificates-carousel";
 import { certificatesPatterns as p } from "@/lib/responsive/pattrens/home";
 
 export function CertificatesSection() {
-  const [certificates, setCertificates] = useState<SanityCertificateCard[]>([]);
+  const [certificates, setCertificates] = useState<CertificateCard[]>([]);
 
   useEffect(() => {
     fetch("/api/certificates")

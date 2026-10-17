@@ -4,12 +4,12 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn, storeAndEncodeUrl, safeOpenUrl } from '@/lib/utils'
-import { SanityCertificateCard } from '@/types/sanity'
+import { CertificateCard } from '@/types/content'
 import { certificatesCarouselPatterns as p } from '@/lib/responsive/pattrens/ui'
 import { Button } from './button'
 
 interface CertificatesCarouselProps {
-  certificates: SanityCertificateCard[]
+  certificates: CertificateCard[]
   className?: string
   priorityFirst?: boolean
 }
@@ -33,7 +33,7 @@ export function CertificatesCarousel({ certificates, className, priorityFirst }:
       >
         {certificates.map((cert, index) => (
           <div
-            key={cert._id}
+            key={cert.id}
             onClick={() => cert.url && safeOpenUrl(storeAndEncodeUrl(cert.url))}
             className={cn(
               p.item,

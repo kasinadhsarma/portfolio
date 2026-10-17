@@ -13,7 +13,7 @@ npm install
 npm run dev        # starts Next.js dev server
 ```
 
-You'll need your own Sanity project for content to load — see [docs/db/SANITY_SCHEMA.md](./docs/db/SANITY_SCHEMA.md) for the schema, and set `NEXT_PUBLIC_SANITY_PROJECT_ID` / `NEXT_PUBLIC_SANITY_DATASET` in `.env.local` (see `sanity/env.ts`).
+Content comes from SethuCMS. Set `SETHUCMS_BASE_URL`, `SETHUCMS_TOKEN` (a read-only viewer token) and `SETHUCMS_CONNECTION_ID` in `.env.local` (see `lib/cms.ts`). Without them the content pages render empty.
 
 Other useful commands:
 

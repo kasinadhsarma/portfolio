@@ -5,7 +5,7 @@ import { ExternalLink, Github, Code2, Shield, Database, Cloud } from "lucide-rea
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { SanityProjectCard } from "@/types/sanity"
+import { ProjectSummary } from "@/types/content"
 import { projectsClientPatterns as p, projectCardPatterns as pc } from "@/lib/responsive/pattrens/projects"
 
 interface Category {
@@ -17,7 +17,7 @@ interface Category {
 export function ProjectsClient({
   projects
 }: {
-  projects: SanityProjectCard[]
+  projects: ProjectSummary[]
 }) {
   const [activeCategory, setActiveCategory] = useState('all')
 
@@ -62,7 +62,7 @@ export function ProjectsClient({
           ) : (
             <div className={p.grid}>
               {filterProjects(id).map(project => (
-                <ProjectCard key={project._id} project={project} />
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           )}
@@ -72,7 +72,7 @@ export function ProjectsClient({
   )
 }
 
-function ProjectCard({ project }: { project: SanityProjectCard }) {
+function ProjectCard({ project }: { project: ProjectSummary }) {
   // Map category values to display labels
   const getCategoryLabel = (categoryValue: string) => {
     const categoryMap: Record<string, string> = {

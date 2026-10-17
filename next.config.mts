@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // NOTE: 'output: export' is intentionally removed.
-  // Sanity Studio (/studio route) requires server-side rendering and is
-  // incompatible with full static export mode.
+  // NOTE: 'output: export' is intentionally removed (server-rendered CMS pages).
   basePath: '',
   typescript: {
     ignoreBuildErrors: true,
@@ -53,15 +51,30 @@ const nextConfig = {
       { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
     ]
 
+    // The SethuCMS admin at /sethu signs people in with Firebase (Google and
+    // GitHub), which loads Google's sign-in script and frame. It needs a wider
+    // policy than the rest of the site, so it gets its own and the strict one
+    // above keeps applying everywhere else.
+    const cmsCsp = [
+      "default-src 'self'",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://apis.google.com`,
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://out-omega-navy.vercel.app https://cdn.sanity.io",
+      "font-src 'self' data:",
+      "connect-src 'self' https://out-omega-navy.vercel.app https://*.googleapis.com https://*.firebaseapp.com https://apis.google.com",
+      "frame-src https://*.firebaseapp.com https://accounts.google.com https://apis.google.com https://github.com",
+      "frame-ancestors 'self'",
+    ].join('; ')
+
     return [
-      // Applied everywhere, including /studio — none of these constrain what
-      // Sanity Studio's admin UI can load, they just harden transport/framing.
-      { source: '/:path*', headers: universalHeaders },
-      // CSP is scoped to the public site only. Sanity Studio is a heavy
-      // client app (inline styles, workers, blob URLs) that a strict CSP
-      // built for the public pages would likely break — give it none rather
-      // than guess at a permissive-enough policy for internals we don't own.
-      { source: '/((?!studio).*)', headers: [{ key: 'Content-Security-Policy', value: csp }] },
+      {
+        source: '/((?!sethu(?:/|$)).*)',
+        headers: [...universalHeaders, { key: 'Content-Security-Policy', value: csp }],
+      },
+      {
+        source: '/sethu/:path*',
+        headers: [...universalHeaders, { key: 'Content-Security-Policy', value: cmsCsp }],
+      },
     ]
   },
 }

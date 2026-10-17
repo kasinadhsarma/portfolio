@@ -1,8 +1,6 @@
 // Runs after `next build`. Obfuscates only the client JS chunks that belong
 // exclusively to the public pages (/, /projects, /research, /resume) — never
-// the Turbopack runtime loader, and never anything also used by /studio
-// (Sanity Studio's own multi-megabyte bundle, and shared React/framework
-// chunks). Turbopack content-hashes chunk filenames on every build, so the
+// the Turbopack runtime loader. Turbopack content-hashes chunk filenames on every build, so the
 // target set is computed fresh each run from the client-reference manifests
 // rather than hardcoded.
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs'
@@ -17,7 +15,6 @@ const NEXT_DIR = path.join(ROOT, '.next')
 const APP_SERVER_DIR = path.join(NEXT_DIR, 'server', 'app')
 
 const PUBLIC_ROUTES = ['/page', '/resume/page', '/projects/page', '/research/page']
-const STUDIO_ROUTE_SUFFIX = '/studio/[[...tool]]/page'
 
 interface RscManifestModule {
   chunks?: string[]
@@ -69,21 +66,18 @@ function main(): void {
   const manifestFiles = findManifestFiles(APP_SERVER_DIR)
 
   const publicChunks = new Set<string>()
-  const studioChunks = new Set<string>()
 
   for (const file of manifestFiles) {
     const { route, chunks } = extractChunks(file)
     if (!route) continue
 
-    if (route === STUDIO_ROUTE_SUFFIX) {
-      chunks.forEach((c) => studioChunks.add(c))
-    } else if (PUBLIC_ROUTES.includes(route)) {
+    if (PUBLIC_ROUTES.includes(route)) {
       chunks.forEach((c) => publicChunks.add(c))
     }
   }
 
   const targets = [...publicChunks].filter(
-    (chunk) => !studioChunks.has(chunk) && !path.basename(chunk).startsWith('turbopack-')
+    (chunk) => !path.basename(chunk).startsWith('turbopack-')
   )
 
   if (targets.length === 0) {

@@ -2,7 +2,7 @@
 
 ## Portfolio App Architecture
 
-Actual structure of this repo (Next.js App Router + Sanity CMS):
+Actual structure of this repo (Next.js App Router + SethuCMS):
 
 ```mermaid
 graph TD
@@ -22,15 +22,14 @@ graph TD
     end
 
     subgraph Data["Content Layer"]
-        SanityClient["sanity/lib/client.ts (GROQ, read)"]
-        WriteClient["sanity/lib/writeClient.ts (write)"]
-        Schema["sanity/schemaTypes/* (project, certificate,\nachievement, skillCategory, resumeFile, resume)"]
+        Content["lib/content.ts (projects, certificates,\nresume, resume files)"]
+        Cms["lib/cms.ts (read-only SethuCMS client)"]
+        Gateway["SethuCMS gateway -> Firestore"]
     end
 
-    PageComponents --> SanityClient
-    SanityClient --> Schema
-    Studio["app/studio/[[...tool]]/page.tsx\n(Sanity Studio UI)"] --> Schema
-    Studio --> WriteClient
+    PageComponents --> Content
+    Content --> Cms
+    Cms --> Gateway
 
     subgraph Config["Styling / Build Config"]
         Tailwind["tailwind.config.ts"]
@@ -41,7 +40,7 @@ graph TD
     Patterns --> Globals
 ```
 
-See [LAYOUT_DIMENSIONS.md](../maths/LAYOUT_DIMENSIONS.md) and [UI_COMPONENTS.md](../maths/UI_COMPONENTS.md) for the per-page and per-component breakdown of this diagram, and [db/SANITY_SCHEMA.md](../db/SANITY_SCHEMA.md) for the `Schema` node's document types and fields.
+See [LAYOUT_DIMENSIONS.md](../maths/LAYOUT_DIMENSIONS.md) and [UI_COMPONENTS.md](../maths/UI_COMPONENTS.md) for the per-page and per-component breakdown of this diagram.
 
 ---
 

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { ChevronDown, FileDown } from "lucide-react";
-import { SanityResumeFileCard } from "@/types/sanity";
+import { ResumeFileCard } from "@/types/content";
 import { resumeDropdownPatterns as p } from "@/lib/responsive/pattrens/ui";
 import Link from "next/link";
 
@@ -25,7 +25,7 @@ export function ResumeDropdown({
   size = "default",
   className
 }: ResumeDropdownProps) {
-  const [resumes, setResumes] = useState<SanityResumeFileCard[]>([]);
+  const [resumes, setResumes] = useState<ResumeFileCard[]>([]);
 
   useEffect(() => {
     fetch("/api/resume-files")

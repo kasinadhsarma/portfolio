@@ -1,25 +1,8 @@
 import { ResumeDropdown } from "@/components/ui/resume-dropdown";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { client } from "@/sanity/lib/client";
-import { SanityResume } from "@/types/sanity";
+import { getResume } from "@/lib/content";
 import { resumePagePatterns as p } from "@/lib/responsive/pattrens/resume";
-
-async function getResume(): Promise<SanityResume | null> {
-  try {
-    return await client.fetch<SanityResume>(`
-      *[_type == "resume"][0] {
-        education,
-        experience,
-        projects,
-        training
-      }
-    `)
-  } catch (error) {
-    console.error('Failed to fetch resume from Sanity:', error)
-    return null
-  }
-}
 
 export default async function ResumePage() {
   const resume = await getResume();

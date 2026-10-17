@@ -2,11 +2,7 @@
 
 ## Architecture
 
-- [architecture/README.md](./architecture/README.md) — this app's real structure as a Mermaid diagram (App Router → page components → UI/pattern layer → Sanity), plus legacy diagram assets.
-
-## DB (Sanity CMS)
-
-- [db/SANITY_SCHEMA.md](./db/SANITY_SCHEMA.md) — Sanity document types, fields, and editorial workflow (the project's "database schema").
+- [architecture/README.md](./architecture/README.md) — this app's real structure as a Mermaid diagram (App Router → page components → UI/pattern layer → SethuCMS), plus legacy diagram assets.
 
 ## Maths
 

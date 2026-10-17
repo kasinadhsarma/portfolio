@@ -6,7 +6,6 @@ import MainNav from "@/components/layout/main-nav"
 import TopBar from "@/components/layout/top-bar"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { headers } from "next/headers"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { GoogleAnalyticsPageView } from "@/components/widgets/google-analytics-pageview"
@@ -24,17 +23,13 @@ export const metadata: Metadata = {
     "Portfolio of Kasinadh Sarma, a full-stack developer, cybersecurity engineer, and penetration testing engineer with a B.Tech in Cyber Security from Parul University.",
 }
 
-async function LayoutWrapper({ children }: { children: React.ReactNode }) {
-  const headersList = await headers()
-  const pathname = headersList.get("x-pathname") ?? ""
-  const isStudio = pathname.startsWith("/studio")
-
+function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      {!isStudio && <TopBar />}
-      {!isStudio && <MainNav />}
-      <div className={!isStudio ? "pb-24 md:pb-28" : undefined}>{children}</div>
-      {!isStudio && <Toaster />}
+      <TopBar />
+      <MainNav />
+      <div className="pb-24 md:pb-28">{children}</div>
+      <Toaster />
     </ThemeProvider>
   )
 }
