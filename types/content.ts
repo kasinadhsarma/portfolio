@@ -22,6 +22,14 @@ export interface CertificateCard {
   category: 'featured' | 'cloud' | 'work' | 'practical'
 }
 
+export interface AchievementCard {
+  id: string
+  title: string
+  description?: string | null
+  date?: string | null
+  icon?: string | null
+}
+
 export interface ResumeFileCard {
   label: string
   url: string
