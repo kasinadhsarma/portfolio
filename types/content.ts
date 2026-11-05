@@ -60,3 +60,30 @@ export interface Resume {
   projects: ResumeProjectEntry[]
   training: TrainingEntry[]
 }
+
+export interface HeroContent {
+  name: string
+  roles: string[]
+  tagline: string
+  email: string
+  phone: string
+  github: string
+  linkedin: string
+  twitter: string
+  avatarImage: string
+}
+
+export interface AboutContent {
+  paragraphs: string[]
+}
+
+export interface ActivityCard {
+  icon: string
+  title: string
+  description: string
+}
+
+export interface SkillGroup {
+  category: string
+  items: string[]
+}

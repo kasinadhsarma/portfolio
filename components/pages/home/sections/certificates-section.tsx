@@ -1,20 +1,14 @@
 'use client'
 
-import { useEffect, useState } from "react";
 import { CertificateCard } from "@/types/content";
 import { CertificatesCarousel } from "@/components/ui/certificates-carousel";
 import { certificatesPatterns as p } from "@/lib/responsive/pattrens/home";
 
-export function CertificatesSection() {
-  const [certificates, setCertificates] = useState<CertificateCard[]>([]);
+interface CertificatesSectionProps {
+  certificates: CertificateCard[];
+}
 
-  useEffect(() => {
-    fetch("/api/certificates")
-      .then((res) => res.json())
-      .then((data) => setCertificates(Array.isArray(data) ? data : []))
-      .catch((error) => console.error("Failed to load certificates:", error));
-  }, []);
-
+export function CertificatesSection({ certificates }: CertificatesSectionProps) {
   const featuredCerts = certificates.filter(cert => cert.category === "featured");
   const cloudCerts = certificates.filter(cert => cert.category === "cloud");
   const practicalCerts = certificates.filter(cert => cert.category === "practical");

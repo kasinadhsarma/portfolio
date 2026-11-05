@@ -45,7 +45,8 @@ export async function cmsList<T extends RecordData = RecordData>(
     if (options.limit) query = query.limit(options.limit)
     return (await query.list()).data
   } catch (error) {
-    logCmsError(`list ${collection}`, error)
+    // A collection that does not exist yet is normal (the site then uses its built-in defaults).
+    if (!(isSethuApiError(error) && error.code === 'NOT_FOUND')) logCmsError(`list ${collection}`, error)
     return []
   }
 }

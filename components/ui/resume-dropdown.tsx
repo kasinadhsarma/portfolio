@@ -18,20 +18,26 @@ interface ResumeDropdownProps {
   variant?: "default" | "outline";
   size?: "default" | "sm" | "lg" | "icon";
   className?: string;
+  /** Pre-fetched resume files. When provided, skips the client-side fetch. */
+  resumeFiles?: ResumeFileCard[];
 }
 
 export function ResumeDropdown({
   variant = "default",
   size = "default",
-  className
+  className,
+  resumeFiles: initialFiles,
 }: ResumeDropdownProps) {
-  const [resumes, setResumes] = useState<ResumeFileCard[]>([]);
+  const [resumes, setResumes] = useState<ResumeFileCard[]>(initialFiles ?? []);
 
   useEffect(() => {
+    // Only fetch if no pre-fetched data was supplied
+    if (initialFiles && initialFiles.length > 0) return;
     fetch("/api/resume-files")
       .then((res) => res.json())
       .then((data) => setResumes(Array.isArray(data) ? data : []))
       .catch((error) => console.error("Failed to load resume files:", error));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

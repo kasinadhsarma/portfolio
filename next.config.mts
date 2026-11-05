@@ -1,3 +1,16 @@
+// Files uploaded in the /sethu editor are served by the SethuCMS gateway, so its address must be
+// allowed as an image source. Without SETHUCMS_BASE_URL (for example in CI) nothing is added.
+const cmsOrigin = (() => {
+  try {
+    return process.env.SETHUCMS_BASE_URL ? new URL(process.env.SETHUCMS_BASE_URL).origin : null
+  } catch {
+    return null
+  }
+})()
+const cmsImagePatterns = cmsOrigin
+  ? [{ protocol: new URL(cmsOrigin).protocol.replace(':', '') as 'http' | 'https', hostname: new URL(cmsOrigin).hostname }]
+  : []
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // NOTE: 'output: export' is intentionally removed (server-rendered CMS pages).
@@ -13,10 +26,10 @@ const nextConfig = {
         hostname: 'komarev.com',
         pathname: '/ghpvc/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
+      ...cmsImagePatterns,
+      // TEMPORARY: files not yet copied by scripts/move-assets-to-sethu.mts. Remove these three
+      // cdn.sanity.io entries (images, img-src, connect-src) once that script reports 0 left.
+      { protocol: 'https', hostname: 'cdn.sanity.io' },
     ],
   },
   experimental: {
@@ -37,9 +50,9 @@ const nextConfig = {
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://va.vercel-scripts.com`,
       "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-      "img-src 'self' data: https://cdn.sanity.io https://komarev.com https://wakatime.com https://www.google.com https://www.google.co.in",
+      `img-src 'self' data:${cmsOrigin ? ` ${cmsOrigin}` : ''} https://cdn.sanity.io https://komarev.com https://wakatime.com https://www.google.com https://www.google.co.in`,
       "font-src 'self' data: https://cdn.jsdelivr.net",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://stats.g.doubleclick.net https://cdn.sanity.io https://out-omega-navy.vercel.app",
+      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://stats.g.doubleclick.net https://out-omega-navy.vercel.app",
       "frame-ancestors 'self'",
     ].join('; ')
 
