@@ -5,7 +5,6 @@ import { HeroSection } from "@/components/pages/home/sections/hero-section";
 import { AboutSection } from "@/components/pages/home/sections/about-section";
 import { WhatImDoingSection } from "@/components/pages/home/sections/what-im-doing";
 import { SkillsSection } from "@/components/pages/home/sections/skills-section";
-import { AchievementsSection } from "@/components/pages/home/sections/achievements-section";
 import { CertificatesSection } from "@/components/pages/home/sections/certificates-section";
 import { ContactCtaSection } from "@/components/pages/home/sections/contact-cta-section";
 import { homePagePatterns as p } from "@/lib/responsive/pattrens/home";
@@ -16,7 +15,6 @@ import type {
   SkillGroup,
   CertificateCard,
   ResumeFileCard,
-  AchievementCard,
 } from "@/types/content";
 
 interface HomePageClientProps {
@@ -26,7 +24,6 @@ interface HomePageClientProps {
   skills: SkillGroup[];
   certificates: CertificateCard[];
   resumeFiles: ResumeFileCard[];
-  achievements: AchievementCard[];
 }
 
 export default function HomePageClient({
@@ -36,7 +33,6 @@ export default function HomePageClient({
   skills,
   certificates,
   resumeFiles,
-  achievements,
 }: HomePageClientProps) {
   return (
     <div className={p.root}>
@@ -61,12 +57,6 @@ export default function HomePageClient({
         <ScrollSection direction="left">
           <SkillsSection skills={skills} />
         </ScrollSection>
-
-        {achievements.length > 0 && (
-          <ScrollSection direction="up">
-            <AchievementsSection achievements={achievements} />
-          </ScrollSection>
-        )}
 
         <ScrollSection direction="right">
           <CertificatesSection certificates={certificates} />

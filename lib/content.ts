@@ -3,7 +3,6 @@ import { cmsList } from '@/lib/cms'
 import { assetUrl } from '@/lib/cms-assets'
 import type {
   CertificateCard,
-  AchievementCard,
   ProjectSummary,
   Resume,
   ResumeFileCard,
@@ -198,16 +197,4 @@ export async function getSkills(): Promise<SkillGroup[]> {
     map.get(cat)!.push(item)
   }
   return Array.from(map.entries()).map(([category, items]) => ({ category, items }))
-}
-
-/** Achievements from the CMS. Empty when the collection has no published records. */
-export async function getAchievements(): Promise<AchievementCard[]> {
-  const records = await cmsList('achievements', { limit: 50, orderBy: ['order', 'asc'] })
-  return records.map((r) => ({
-    id: String(r.id),
-    title: String(r.title ?? ''),
-    description: (r.description as string | null) ?? null,
-    date: (r.date as string | null) ?? null,
-    icon: assetUrl(r.icon as AssetField),
-  }))
 }
