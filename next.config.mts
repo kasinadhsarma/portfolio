@@ -27,9 +27,6 @@ const nextConfig = {
         pathname: '/ghpvc/**',
       },
       ...cmsImagePatterns,
-      // TEMPORARY: files not yet copied by scripts/move-assets-to-sethu.mts. Remove these three
-      // cdn.sanity.io entries (images, img-src, connect-src) once that script reports 0 left.
-      { protocol: 'https', hostname: 'cdn.sanity.io' },
     ],
   },
   experimental: {
@@ -50,7 +47,7 @@ const nextConfig = {
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://va.vercel-scripts.com`,
       "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-      `img-src 'self' data:${cmsOrigin ? ` ${cmsOrigin}` : ''} https://cdn.sanity.io https://komarev.com https://wakatime.com https://www.google.com https://www.google.co.in`,
+      `img-src 'self' data:${cmsOrigin ? ` ${cmsOrigin}` : ''} https://komarev.com https://wakatime.com https://www.google.com https://www.google.co.in`,
       "font-src 'self' data: https://cdn.jsdelivr.net",
       "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://stats.g.doubleclick.net https://out-omega-navy.vercel.app",
       "frame-ancestors 'self'",
@@ -72,7 +69,7 @@ const nextConfig = {
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://apis.google.com`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://out-omega-navy.vercel.app https://cdn.sanity.io",
+      "img-src 'self' data: blob: https://out-omega-navy.vercel.app",
       "font-src 'self' data:",
       "connect-src 'self' https://out-omega-navy.vercel.app https://*.googleapis.com https://*.firebaseapp.com https://apis.google.com",
       "frame-src https://*.firebaseapp.com https://accounts.google.com https://apis.google.com https://github.com",
